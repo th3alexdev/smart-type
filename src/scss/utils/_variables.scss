@@ -4,7 +4,7 @@ $theme-default: (
 
     /* colors secondary */
     "yellow-contrast": #FFE736,
-    "fushia-contrast": #FF31B4 
+    "fushia-contrast": #FF31B4,
     
     /* buttons colors */
     "principal-btn-bg": #1E90FF,
@@ -14,8 +14,12 @@ $theme-default: (
     "main-bg": #EEE,
     "header-bg": #F5F5F5,
 
+    /* pills color */
+    "pill-principal-color": #F6F6F6,
+    "pill-secondary-color": #D9D9D9,
+
     /* shapes */
-    "shapes-color": #000080,
+    "shapes-color": #000080
 );
 
 // $properties: (
