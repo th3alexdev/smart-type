@@ -1,27 +1,29 @@
+import React, { useState, useEffect} from "react"
+import "./scss/styles.scss"
+import {
+        Header,
+        HeaderNav,
+        Section
+       } from "./routes"
 
 function App() {
+  const [section, setSection] = useState("home");
+  const [showSection, setShowSection] = useState(false);
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button></button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <>
+      <Header>
+        <HeaderNav 
+          setSection={ setSection }
+          setShowSection={ setShowSection }
+        />
+      </Header>
+      <main className="main">
+        <Section section={ section }>
+    
+        </Section>
+      </main>
+    </>
   )
 }
 
