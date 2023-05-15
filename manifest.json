@@ -2,8 +2,8 @@
     "manifest_version": 3,
     "name": "SmartType Text Expander",
     "version": "1.0",
-    "description": "With this tool, you will have the power to automate your workflows, save time and enhance your productivity by eliminating repetitive typing tasks.",
     "author": "dev.alexandeperez@protonmail.com",  
+    "description": "With this tool, you will have the power to automate your workflows, save time and enhance your productivity by eliminating repetitive typing tasks.",
     "icons": {
         "16": "/public/icon16.png",
         "32": "/public/icon32.png",
@@ -14,8 +14,7 @@
         "default_title":"Smart Type Expander"
     },
     "permissions": [
-        "activeTab", 
-        "scripting"
+        "tabs"
     ],
     "homepage_url": "http://localhost:5173/",
     "background": {
