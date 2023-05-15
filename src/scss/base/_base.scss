@@ -1,0 +1,78 @@
+@use "../utils/variables" as v;
+@use "../utils/functions" as f;
+@use "../utils/mixins" as m;
+
+* {
+    box-sizing: border-box;
+    outline: 1px dashed #00000057;
+}
+
+:root {
+    @each $name, $color in v.$theme-default {
+        --color-#{$name}: #{$color};
+    }
+
+//     @each $name, $property in v.$properties {
+//         --#{$name}: #{$property};
+//     }
+
+    @each $name, $font in v.$fonts {
+        --#{$name}: #{$font};
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    background-color: f.getColor("main-bg");
+    font-family: f.getFont("main-font");
+    font-weight: 300;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul, ol {
+    list-style-type: none;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+    font-weight: inherit;
+}
+
+p {
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+input {
+    width: 100%;
+    border: none;
+    font-family: inherit;
+}
+
+input:foucs {
+    outline: none;
+}
+
+button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+}
+
+textarea {
+    resize: none;
+    border: none;
+    width: 100%;
+}
