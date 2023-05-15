@@ -1,0 +1,33 @@
+@use "../utils/variables" as v;
+@use "../utils/functions" as f;
+@use "../utils/mixins" as m;
+
+.nav {
+    &-list {
+        display: flex;
+        gap: 35px;
+
+        &__item {
+            width: 145px;
+            display: grid;
+            justify-content: center
+        }
+    }
+
+    &-active {
+        position: relative;
+        font-weight: 500;
+
+        &::after{
+            position: absolute;
+            content: '';
+            bottom: -12px;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background-color: #000;
+            transform: translateX(-50%);
+            border-radius: 50%;
+        }
+    }
+}

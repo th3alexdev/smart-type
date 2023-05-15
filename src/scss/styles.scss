@@ -4,6 +4,16 @@
 // @use "../utils/mixins" as m;
 
 /* base */
+@forward 'base/fonts';
 @forward 'base/base';
 @forward 'base/typography';
 
+/* layout */
+@forward 'layout/header';
+@forward 'layout/main';
+
+/* components */
+@forward 'components/links';
+@forward 'components/navs';
+@forward 'components/brand';
+@forward 'components/sections';

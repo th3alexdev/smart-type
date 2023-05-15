@@ -1,0 +1,18 @@
+@use "../utils/variables" as v;
+@use "../utils/functions" as f;
+@use "../utils/mixins" as m;
+
+.brand {
+    position: relative;
+    font-weight: 600;
+
+    &::before {
+        position: absolute;
+        content: '';
+        right: -28px;
+        width: 22px;
+        height: 22px;
+        background-image: url("../../../src/assets/svg/blink.svg");
+        background-size: 100%;
+    }
+}

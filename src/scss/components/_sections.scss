@@ -1,0 +1,8 @@
+@use "../utils/variables" as v;
+@use "../utils/functions" as f;
+@use "../utils/mixins" as m;
+
+.section {
+    background-color: red;
+    padding: 35px 0;
+}

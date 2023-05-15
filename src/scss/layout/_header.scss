@@ -1,0 +1,17 @@
+@use "../utils/variables" as v;
+@use "../utils/functions" as f;
+@use "../utils/mixins" as m;
+
+.header {
+    width: 100%;
+    padding: 25px 95px;
+    display: flex;
+    justify-content: center;
+
+    &-container {
+        width: 100%;
+        max-width: 1350px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
