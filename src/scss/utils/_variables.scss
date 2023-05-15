@@ -1,0 +1,30 @@
+$theme-default: (
+    /* colors */
+    "brand-text-color": #1E90FF,
+
+    /* colors secondary */
+    "yellow-contrast": #FFE736,
+    "fushia-contrast": #FF31B4 
+    
+    /* buttons colors */
+    "principal-btn-bg": #1E90FF,
+    "secondary-btn-bg": #000080,
+
+    /* backgrunds */
+    "main-bg": #EEE,
+    "header-bg": #F5F5F5,
+
+    /* shapes */
+    "shapes-color": #000080,
+);
+
+// $properties: (
+//     "opacity": opacity(45%),
+//     "padding": 25px 20px,
+//     "border-radius": 25px
+// );
+
+$fonts: (
+    "main-font": "'General Sans', sans-serif",
+    "monospace-font": "'Fira Code', monospace"
+)
