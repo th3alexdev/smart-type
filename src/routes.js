@@ -1,3 +1,7 @@
 export { default as Header } from "./components/Header"
 export { default as HeaderNav } from "./components/HeaderNav"
 export { default as Section } from "./components/Section"
+export { default as Nav } from "./components/Nav"
+export { default as Form } from  "./components/Form"
+export { default as MainButton } from "./components/MainButton"
+export { default as Card } from "./components/Card"
