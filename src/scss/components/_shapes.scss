@@ -1,0 +1,10 @@
+@use "../utils/variables" as v;
+@use "../utils/functions" as f;
+@use "../utils/mixins" as m;
+
+
+.hr {
+    width: 100%;
+    height: .5px;
+    background-color: #00000040;
+}

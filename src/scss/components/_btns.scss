@@ -1,0 +1,34 @@
+@use "../utils/variables" as v;
+@use "../utils/functions" as f;
+@use "../utils/mixins" as m;
+
+.btn {
+    cursor: pointer;
+}
+
+.btn-main {
+
+    height: 40px;
+    padding: 0 15px;
+    
+    font-family: inherit;
+    font-size: 1rem;
+    
+    border-radius: 3px;
+    color: #fff;
+    background-color: f.getColor('principal-btn-bg');
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.btn-edit {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    transition: background .3s;
+}

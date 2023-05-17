@@ -1,0 +1,107 @@
+@use "../utils/variables" as v;
+@use "../utils/functions" as f;
+@use "../utils/mixins" as m;
+
+.cards-container {
+    display: flex;
+    padding-top: 15px;
+}
+
+.card {
+    cursor: pointer;
+    
+    width: 100%;
+    padding: 15px 45px;
+    display: grid;
+    grid-template-columns: 40% 1fr 15% 7%;
+    grid-template-rows: 50px 50px;
+    background-color: f.getColor('card-bg');
+    border-radius: 12px;
+    row-gap: 5px;
+
+    &__shortcut {
+        width: max-content;
+        font-weight: 500;
+        font-family: f.getFont("monospace-font");
+        letter-spacing: -1px;
+        
+        align-self: flex-end;
+        grid-row: 1 / 2;
+    }
+
+    &__command {
+        width: 265px;
+        height: 26px;
+        display: inline;
+        grid-row: 2 / 3;
+
+        background-color: #F4F4F4;
+        padding: 2px 15px;
+        border-radius: 5px;
+    }
+
+    &__description {
+        position: relative;
+        width: 195px;
+        padding-left: 15px;
+        font-size: 1.2rem;
+        font-family: f.getFont("card-font");
+        grid-row: 1 / 3;
+        align-self: center;
+
+        &::before {
+            position: absolute;
+            content: "";
+            top: 52%;
+            left: 0;
+            width: 0.5px;
+            height: 65px;
+            background-color: #00000080;
+            transform: translateY(-50%);
+        }
+    }
+
+    &__stats {
+        width: max-content;
+        align-self: center;
+        grid-row: 1 / 3;
+        
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__edit-btn {
+        grid-row: 1 / 3;
+        align-self: center;
+        justify-self: center;
+    }
+}
+
+.card-icon {
+    font-size: 1rem;
+}
+
+.card-pill {
+    width: 72px;
+    height: 28px;
+
+    font-size: 1rem;
+    font-weight: 500;
+
+    color: f.getColor('card-secondary-color');
+    background-color: f.getColor('card-pill');
+    
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 15px 25%;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    border-radius: 30px;
+}
+
+.card:hover > .btn-edit {
+    background-color: f.getColor("card-pill");
+} 

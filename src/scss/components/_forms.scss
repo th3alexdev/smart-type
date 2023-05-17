@@ -1,0 +1,39 @@
+@use "../utils/variables" as v;
+@use "../utils/functions" as f;
+@use "../utils/mixins" as m;
+
+.form {
+    padding: 48px 72px;
+    background-color: f.getColor('form-bg');
+
+    &__label {
+        width: 100%;
+        display: block;
+    }
+
+    &__input {
+        height: 100%;
+        min-height: 210px;
+        padding: 25px 30px;
+        outline: 0.3px solid #00000059;
+        border-radius: 5px;
+        letter-spacing: .5px;
+
+        font: {
+            size: 1.2rem;
+            family: inherit;
+            weight: 400;
+        }
+        letter-spacing: .5px;
+
+        &:empty::before {
+            position: absolute;
+            content: attr(data-placeholder);
+            font-weight: 300;
+        }
+
+        &:focus {
+            background-color: #fbfbfb;
+        }
+    }
+}
