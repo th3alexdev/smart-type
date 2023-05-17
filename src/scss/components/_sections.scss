@@ -3,6 +3,11 @@
 @use "../utils/mixins" as m;
 
 .section {
-    background-color: red;
     padding: 35px 0;
+
+    &-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
