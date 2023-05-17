@@ -8,10 +8,10 @@ function HeaderNav({ setSection, setShowSection }) {
 
     const navItems = document.querySelectorAll('.nav-list__item');
     navItems.forEach(item => {
-      item.querySelector('a').classList.remove('nav-active');
+      item.querySelector('a').classList.remove('nav-header-active');
     });
   
-    e.target.classList.add('nav-active');
+    e.target.classList.add('nav-header-active');
   }
 
   return (
@@ -20,7 +20,7 @@ function HeaderNav({ setSection, setShowSection }) {
         <li className="nav-list__item">
           <a 
             href="#shortcuts" 
-            className="link nav-active"
+            className="link nav-header-active"
             data-section="home"
             onClick={((e) => sectionHandler(e))}
           >Your shortcuts</a>
