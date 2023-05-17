@@ -7,10 +7,12 @@
     padding: 25px 95px;
     display: flex;
     justify-content: center;
+    background-color: f.getColor("header-bg");
+    border-bottom: 1px solid #00000010;
 
     &-container {
         width: 100%;
-        max-width: 1350px;
+        max-width: 950px;
         display: flex;
         justify-content: space-between;
     }
