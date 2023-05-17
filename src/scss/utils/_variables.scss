@@ -13,6 +13,13 @@ $theme-default: (
     /* backgrunds */
     "main-bg": #EEE,
     "header-bg": #F5F5F5,
+    "form-bg": #FFF,
+
+    /* card */
+    "card-bg": #FFF,
+    "card-pill": #F4F4F4,
+    "card-secondary-color": #000000c6,
+
 
     /* pills color */
     "pill-principal-color": #F6F6F6,
@@ -20,7 +27,7 @@ $theme-default: (
 
     /* shapes */
     "shapes-color": #000080
-);
+); 
 
 // $properties: (
 //     "opacity": opacity(45%),
@@ -30,5 +37,6 @@ $theme-default: (
 
 $fonts: (
     "main-font": "'General Sans', sans-serif",
+    "card-font": "'Open Sans', sans-serif",
     "monospace-font": "'Fira Code', monospace"
 )
