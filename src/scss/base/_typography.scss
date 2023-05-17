@@ -2,3 +2,8 @@
 @use "../utils/functions" as f;
 @use "../utils/mixins" as m;
 
+.title {
+    width: 100%;
+    margin-bottom: 25px;
+    font-weight: 500;
+}

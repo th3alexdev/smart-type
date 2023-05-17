@@ -8,13 +8,19 @@
         gap: 35px;
 
         &__item {
-            width: 145px;
+            width: 182px;
+            font-size: 1.2rem;
             display: grid;
-            justify-content: center
+            justify-content: center;
+
+            &--short {
+                width: 150px;
+            }
         }
     }
 
-    &-active {
+
+    &-header-active {
         position: relative;
         font-weight: 500;
 
@@ -29,5 +35,9 @@
             transform: translateX(-50%);
             border-radius: 50%;
         }
+    }
+
+    &-active {
+        font-weight: 400;
     }
 }
