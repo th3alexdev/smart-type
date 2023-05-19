@@ -2,38 +2,161 @@
 @use "../utils/functions" as f;
 @use "../utils/mixins" as m;
 
+.form-group {
+    position: relative;
+    width: 100%;
+}
+
 .form {
     padding: 48px 72px;
     background-color: f.getColor('form-bg');
 
+    &__title {
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+
     &__label {
-        width: 100%;
-        display: block;
+        z-index: 30;
+        cursor: auto;
+        pointer-events: none;
+        position: absolute;
+        top: 7px;
+        left: 0;
+        width: max-content;
+        transition: transform .3s;
+        font-weight: 400;
+        background-color: #fff;
+        padding: 1px;
+        
+        transform: translateX(15px);
+    }
+
+    &-inputs-container {
+        height: 35px;
+        margin-bottom: 18px;
+        display: flex;
+        gap: 12px;
     }
 
     &__input {
+        width: 100%;
+        height: 40px;
+        padding: 0 18px;
+
+        &:nth-of-type(2) {
+            width: 45%;
+        }
+    }
+
+    &__textarea {
         height: 100%;
         min-height: 210px;
+        max-height: 470px;
         padding: 25px 30px;
-        outline: 0.3px solid #00000059;
-        border-radius: 5px;
-        letter-spacing: .5px;
-
-        font: {
-            size: 1.2rem;
-            family: inherit;
-            weight: 400;
-        }
-        letter-spacing: .5px;
+        margin-bottom: 12px;
+        overflow-y: auto;
 
         &:empty::before {
             position: absolute;
             content: attr(data-placeholder);
-            font-weight: 300;
+            font-weight: 400;
+            font-family: f.getFont("main-font");
+        }
+    }
+
+    &-command {
+        width: 45px;
+        font-family: f.getFont('monospace-font');
+        font-size: 2rem;
+        padding: 0 12px;
+
+        &::placeholder {
+            color: #000;
+        }
+
+        &:disabled {
+            background-color: #fff;
+        }
+    }
+
+    &-field {
+        position: relative;
+        font: {
+            size: 1rem;
+            family: "Segoe UI", "Helvetica Neue", "Helvetica", "Lucida Grande", "Arial", "Ubuntu", "Cantarell", "Fira Sans",sans-serif;
+            weight: 400;
+        }
+
+        outline: 0.3px solid #00000059;
+        border-radius: 5px;
+        letter-spacing: .5px;
+
+        transition: outline .3s, background .3s;
+
+        &::placeholder {
+            font-weight: 400;
+            color: #000;
         }
 
         &:focus {
             background-color: #fbfbfb;
+            outline: 0.3px solid #00000088;
+        }
+    }
+}
+
+
+.form-invalid {
+    &::after {
+        content: "*";
+        padding-left: 5px;
+        color: #f00;
+    }
+}
+
+.input-invalid {
+    outline: 1px solid rgba(255, 0, 0, 0.674);
+    
+    &:hover, &:focus {
+        outline: 1px solid rgba(255, 0, 0, 0.674);
+    }
+}
+
+.input-valid {
+    outline: 1px solid rgba(0, 139, 28, 0.478);
+    
+    &:hover, &:focus {
+        outline: 1px solid rgba(0, 139, 28, 0.478);
+    }
+}
+
+
+.form__input:focus ~ .form__label,
+.form__input:valid ~ .form__label {
+    transform: translateX(0px) translateY(-21px) scale(0.7);
+}
+
+.form__input:focus ~ .form__label--large,
+.form__input:valid ~ .form__label--large {
+    transform: translateX(-10px) translateY(-21px) scale(0.7);
+}
+
+.form-errors {
+    font-weight: 500;
+    padding-left: 15px;
+
+    &__item {
+        position: relative;
+        padding-left: 5px;
+        &::before {
+            position: absolute;
+            content: "*";
+            left: -10px;
+            top: 60%;
+            padding-right: 5px;
+            color: #f00;
+            transform: translateY(-50%);
         }
     }
 }
