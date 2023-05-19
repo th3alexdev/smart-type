@@ -15,6 +15,9 @@ $theme-default: (
     "header-bg": #F5F5F5,
     "form-bg": #FFF,
 
+    /* pills */
+    "pill-bg": #e1e1e1,
+
     /* card */
     "card-bg": #FFF,
     "card-pill": #F4F4F4,
@@ -37,6 +40,6 @@ $theme-default: (
 
 $fonts: (
     "main-font": "'General Sans', sans-serif",
-    "card-font": "'Open Sans', sans-serif",
+    "sec-font": "'Open Sans', sans-serif",
     "monospace-font": "'Fira Code', monospace"
 )
