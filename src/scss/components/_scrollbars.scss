@@ -1,0 +1,23 @@
+@use "../utils/variables" as v;
+@use "../utils/functions" as f;
+@use "../utils/mixins" as m;
+
+.form__textarea {
+    &::-webkit-scrollbar {
+        width: 13px;
+        z-index: 50;
+        background-color: #e1e1e1;
+        border-right: 6px solid #fff;
+        border-radius: 10px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: #c9c9c9;
+        border-right: 6px solid #fff;
+    }
+    
+    &::-webkit-scrollbar-button {
+        height: 12px;
+        background-color: #fff;
+    }
+}

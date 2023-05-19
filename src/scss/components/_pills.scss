@@ -1,0 +1,30 @@
+@use "../utils/variables" as v;
+@use "../utils/functions" as f;
+@use "../utils/mixins" as m;
+
+.pills-container {
+    width: 100%;
+    margin-bottom: 15px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    &::before {
+        content: "";
+        width: 30px;
+        height: 1px;
+        background-color: f.getColor('shapes-color');
+    }
+}
+
+.pill {
+    width: max-content;
+    height: max-content;
+    padding: 5px 8px;
+    background-color: f.getColor('pill-bg');
+
+    font-family: f.getFont('monospace-font');
+    font-weight: 400;
+    letter-spacing: -.5px;
+}
