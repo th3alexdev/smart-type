@@ -4,7 +4,8 @@ export default class Shortcut {
     private description: string;
     private expansion: string;
     private dateCreated: Date;
-    private lastUsedDate: null | number;
+    private lastUsedDate: undefined | number;
+    private timesUsed: number;
 
     constructor({
         name,
@@ -27,7 +28,8 @@ export default class Shortcut {
         this.description = description;
         this.expansion = expansion;
         this.dateCreated = new Date();
-        this.lastUsedDate = null;
+        this.lastUsedDate = undefined;
+        this.timesUsed = 0;
     }
 
     expandShortcut( target: HTMLElement, command: string ): void {
