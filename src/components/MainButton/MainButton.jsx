@@ -1,8 +1,16 @@
 import React from 'react'
 
-function MainButton({ cta, children }) {
+function MainButton({ cta, children, setOpenModal }) {
+
+  const modalHandler = () => {
+    setOpenModal(true)
+  }
+
   return (
-    <button className="btn btn-main">
+    <button 
+      className="btn btn-main"
+      onClick={ setOpenModal ? () => { modalHandler() } : null }
+    >
       {
         children
       }
