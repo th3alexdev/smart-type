@@ -5,7 +5,7 @@ import {
         HeaderNav,
         Section
        } from "./routes"
-
+      
 function App() {
   const [section, setSection] = useState("home");
   const [showSection, setShowSection] = useState(false);
@@ -17,11 +17,12 @@ function App() {
           setSection={ setSection }
           setShowSection={ setShowSection }
         />
-      </Header>
+      </Header> 
       <main className="main">
-        <Section section={ section }>
-    
-        </Section>
+        <Section 
+          section={ section }
+          showSection={ showSection }
+        />
       </main>
     </>
   )
