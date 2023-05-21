@@ -1,6 +1,6 @@
 import Shortcut from "./Shortcut";
 
-export default class ShortcutsManager {
+class ShortcutsManager {
     shortcuts: Array<Shortcut>;
 
     constructor() {
@@ -37,3 +37,15 @@ export default class ShortcutsManager {
         return console.log(this.shortcuts.length)
     }
 }
+
+const Manager = new ShortcutsManager();
+
+const Testing = new Shortcut({
+    name: "testing",
+    description: "Proof of SmartTypes works",
+    expansion: `This is a proof \n of how this \n extension works 💛`
+});
+
+Manager.addShortcut(Testing)
+
+export default Manager;
