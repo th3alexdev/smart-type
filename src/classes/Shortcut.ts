@@ -1,10 +1,10 @@
-export default class Shortcut {
+export class Shortcut {
     private name: string;
     private shortcut: string;
     private description: string;
     private expansion: string;
     private dateCreated: Date;
-    private lastUsedDate: undefined | number;
+    private lastUsedDate: undefined | Date;
     private timesUsed: number;
 
     constructor({
@@ -60,7 +60,27 @@ export default class Shortcut {
         
             textInArray[index] = expansion;  
             target.innerText = textInArray.join(" ");
+
+            this.timesUsed++;
+            this.lastUsedDate = new Date;
+            console.log(this.lastUsedDate)
         }
+    }
+
+    formatTime(date: Date): string {
+        const diff = Math.floor((Date.now() - date) / 1000); 
+
+        if (diff < 60) {
+          return `${diff}s`;
+        } else if (diff < 3600) {
+          return `${Math.floor(diff / 60)}m`;
+        } else {
+          return `${Math.floor(diff / 86400)}d`;
+        }
+    }
+
+    setShortcut( command: string ) {
+        this.shortcut = command;
     }
 }
 
