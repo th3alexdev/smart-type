@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Nav({ setItems, setShowItems }) {
+function Nav({ setSortBy, setShowItems }) {
 
   const sectionHandler = (e) => {
-    setItems(e.target.dataset.section)
+    setSortBy(e.target.dataset.section)
     setShowItems(true)
 
     const navItems = document.querySelectorAll('.nav-list__item');
