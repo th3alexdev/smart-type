@@ -38,11 +38,11 @@
 }
   
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: f.getColor('secondary-btn-bg');
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px f.getColor('secondary-btn-bg');
 }
 
 input:checked + .slider:before {
