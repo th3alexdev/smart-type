@@ -2,8 +2,6 @@
 @use "../utils/functions" as f;
 @use "../utils/mixins" as m;
 
-$main-button: map-get($map: v.$theme-default, $key: principal-btn-bg);
-
 .btn {
     cursor: pointer;
     font-family: inherit;
@@ -29,7 +27,7 @@ $main-button: map-get($map: v.$theme-default, $key: principal-btn-bg);
     transition: background .3s;
 
     &:not([disabled]):hover {
-        background-color: lighten($main-button, 10%);
+        background-color: f.getColor('principal-btn-hover-bg');
     }
 
     &:disabled {
@@ -50,15 +48,30 @@ $main-button: map-get($map: v.$theme-default, $key: principal-btn-bg);
     transition: background .3s;
 
     &:hover {
-        background-color: #002f70;
+        background-color: f.getColor('secondary-btn-hover-bg');
     }
 }
 
-.btn-edit {
+.btn-card {
     width: 45px;
     height: 45px;
     border-radius: 50%;
     display: grid;
     place-items: center;
     transition: background .3s;
+}
+
+.btn-cross {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(45deg);
+    border-radius: 50%;
+    transition: background .3s;
+
+    &:hover {
+        background-color: f.getColor('pill-bg');
+    }
 }
