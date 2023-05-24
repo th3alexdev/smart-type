@@ -8,12 +8,23 @@ $theme-default: (
     
     /* buttons colors */
     "principal-btn-bg": #1E90FF,
-    "secondary-btn-bg": #000080,
+    "secondary-btn-bg": #4C4CFF,
+
+    /* buttons hovers */
+    "principal-btn-hover-bg": lighten(#1E90FF, 10%),
+    "secondary-btn-hover-bg": lighten(#4C4CFF, 10%),
+
+    /* dropdown buttons */
+    "dropdown-btn-bg": #FFF,
+    "dropdown-btn-hover-bg": #DDD,
 
     /* backgrunds */
     "main-bg": #EEE,
     "header-bg": #F5F5F5,
-    "form-bg": #FFF,
+    "modal-bg": #FFF,
+
+    /* text */
+    "text-color": #222,
 
     /* pills */
     "pill-bg": #e1e1e1,
@@ -22,15 +33,88 @@ $theme-default: (
     "card-bg": #FFF,
     "card-pill": #F4F4F4,
     "card-secondary-color": #000000c6,
-
+    "card-command-reveal": #f3f3f3,
 
     /* pills color */
     "pill-principal-color": #F6F6F6,
     "pill-secondary-color": #D9D9D9,
+    "pill-text-color": #FFF,
 
     /* shapes */
-    "shapes-color": #000080
+    "shapes-color": #0000803f,
+    
+    /* lines */
+    "line-color": #00000080,
+    "line-color-secondary": #00000040,
+    "line-color-tertiary": #00000020,
+
+    /* icons */
+    "icon-color": #000000c6,
+
+    /* input */
+    "input-outline": #00000059,
+    "input-focus-outline": #00000084,
+    "input-focus-bg": #fbfbfb,
+    "label-bg": #FFF,
 ); 
+
+$theme-dark: (
+    /* colors */
+    "brand-text-color": #1E90FF,
+
+    /* colors secondary */
+    "yellow-contrast": #FFE736,
+    "fushia-contrast": #FF31B4,
+    
+    /* buttons colors */
+    "principal-btn-bg": #1E90FF,
+    "secondary-btn-bg": #4C4CFF,
+
+    /* buttons hovers */
+    "principal-btn-hover-bg": lighten(#1E90FF, 10%),
+    "secondary-btn-hover-bg": lighten(#4C4CFF, 10%),
+
+    /* backgrounds */
+    "main-bg": #222,
+    "header-bg": #333,
+    "modal-bg": #444,
+
+    /* text */
+    "text-color": #EEE,
+
+    /* pills */
+    "pill-bg": #858585d4,
+
+    /* card */
+    "card-bg": #333,
+    "card-pill": #444,
+    "card-secondary-color": #EEE,
+    "card-command-reveal": #5a5a5a,
+
+
+    /* pills color */
+    "pill-principal-color": #444,
+    "pill-secondary-color": #666,
+    "pill-text-color": #FFF,
+
+    /* shapes */
+    "shapes-color": #FFF,
+
+    /* lines */
+    "line-color": #eeeeee81,
+    "line-color-secondary": #eeeeee4d,
+    "line-color-tertiary": #eeeeee28,
+
+    /* icons */
+    "icon-color": #eeeeeedf,    
+
+    /* input */
+    "input-outline": #cdcdcd59,
+    "input-focus-outline": lighten(#cdcdcd59, 10%),
+    "input-bg": #484848,
+    "label-bg": #444,
+);
+
 
 // $properties: (
 //     "opacity": opacity(45%),
@@ -41,5 +125,6 @@ $theme-default: (
 $fonts: (
     "main-font": "'General Sans', sans-serif",
     "sec-font": "'Open Sans', sans-serif",
-    "monospace-font": "'Fira Code', monospace"
+    "monospace-font": "'Fira Code', monospace",
+    "input-font": "'Segoe UI', 'Helvetica Neue', 'Helvetica', 'Lucida Grande', 'Arial', 'Ubuntu', 'Cantarell', 'Fira Sans', sans-serif"
 )
