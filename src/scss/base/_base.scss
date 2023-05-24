@@ -33,6 +33,13 @@ body {
     font-weight: 300;
 }
 
+.dark-mode {
+    @each $name, $color in v.$theme-dark {
+        --color-#{$name}: #{$color};
+    }
+
+}
+
 a {
     text-decoration: none;
 }
