@@ -3,18 +3,66 @@
 @use "../utils/mixins" as m;
 
 .nav {
+    /* mobile */
+    @media (max-width: 809px) { 
+        z-index: 50;
+        position: absolute;
+        width: 85%;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        background-color: f.getColor('header-bg');
+        display: grid;
+        place-items: center;
+        transition: transform .3s;
+        transform: translateX(100%);
+        box-shadow: 2px 5px 10px 0 #00000034;
+    }
+
+    &--active {
+        transform: translateX(0%);
+    }
+
     &-list {
         display: flex;
-        gap: 35px;
+
+        /* desktop */
+        @media (min-width: 810px) and (max-width: 849px) {
+            gap: 15px;
+        }
+        @media (min-width: 850px) {
+            gap: 35px;
+        }
+        
+
+        /* mobile */
+        @media (max-width: 809px) {
+            width: inherit;
+            height: inherit;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            font-size: 1.2rem;
+        }
 
         &__item {
-            width: 182px;
-            font-size: 1.2rem;
-            display: grid;
-            justify-content: center;
 
-            &--short {
-                width: 150px;
+            /* desktop */
+            @media (min-width: 810px) and (max-width: 925px) {
+                width: 120px;
+                text-align: center;
+            }
+
+            @media (min-width: 810px) {
+                font-size: 1.2rem;
+                display: grid;
+                justify-content: center;
+                color: f.getColor('text-color');
+
+                &--short {
+                    width: 150px;
+                }
             }
         }
     }
@@ -31,13 +79,28 @@
             left: 50%;
             width: 5px;
             height: 5px;
-            background-color: #000;
+            background-color: f.getColor('text-color');
             transform: translateX(-50%);
             border-radius: 50%;
+
+            @media(max-width: 800px) {
+                width: 85%;
+                height: 1px;
+                bottom: -7px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 0;
+            }
         }
     }
 
     &-active {
         font-weight: 400;
+    }
+
+    &__cross-btn {
+        @media (min-width: 810px) {
+            display: none;
+        }
     }
 }
