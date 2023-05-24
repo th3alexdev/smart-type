@@ -22,8 +22,9 @@
     width: max-content;
     height: max-content;
     padding: 5px 8px;
-    background-color: f.getColor('pill-bg');
+    background-color: f.getColor('secondary-btn-bg');
 
+    color: f.getColor('pill-text-color');
     font-family: f.getFont('monospace-font');
     font-weight: 400;
     letter-spacing: -.5px;

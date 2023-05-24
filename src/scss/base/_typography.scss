@@ -3,6 +3,7 @@
 @use "../utils/mixins" as m;
 
 .title {
+    color: f.getColor('text-color');
     height: max-content;
     font-weight: 500;
 
