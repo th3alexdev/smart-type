@@ -5,6 +5,14 @@
 .main {
     width: 100%;
     max-width: 1270px;
-    padding: 15px 95px 0 95px;
+    padding: 15px 12px 0 12px;
     margin: 0 auto;
+    
+    @media(min-width: 800px) {
+        padding: 15px 95px 0 95px;
+    }
+
+    @media(min-width: 600px) and (max-width: 799px) {
+        padding: 15px 22px 0 22px;
+    }
 }

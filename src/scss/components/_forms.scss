@@ -8,8 +8,21 @@
 }
 
 .form {
-    padding: 48px 72px;
-    background-color: f.getColor('form-bg');
+    padding: 35px 26px;
+    background-color: f.getColor('modal-bg');
+    
+    @media (min-width: 450px) and (max-width: 559px) {
+        padding: 37px 32px;
+    }
+
+    @media (min-width: 560px) and (max-width: 700px) {
+        padding: 39px 55px;
+    }
+
+    @media (min-width: 700px) {
+        padding: 48px 72px;
+    }
+
 
     &__title {
         margin-bottom: 15px;
@@ -26,10 +39,10 @@
         width: max-content;
         transition: transform .3s;
         font-weight: 400;
-        background-color: #fff;
+        background-color: f.getColor('label-bg');
         padding: 1px;
-        
         transform: translateX(15px);
+        color: f.getColor('text-color')
     }
 
     &-inputs-container {
@@ -62,6 +75,7 @@
             content: attr(data-placeholder);
             font-weight: 400;
             font-family: f.getFont("main-font");
+            color: f.getColor('text-color');
         }
     }
 
@@ -69,39 +83,43 @@
         width: 45px;
         font-family: f.getFont('monospace-font');
         font-size: 2rem;
-        padding: 0 12px;
+        padding: 0 0px;
 
         &::placeholder {
-            color: #000;
+            color: f.getColor('text-color');
+            text-align: center;
         }
 
         &:disabled {
-            background-color: #fff;
+            background-color: f.getColor('modal-bg');
         }
     }
 
     &-field {
+        cursor: auto;
         position: relative;
         font: {
             size: 1rem;
-            family: "Segoe UI", "Helvetica Neue", "Helvetica", "Lucida Grande", "Arial", "Ubuntu", "Cantarell", "Fira Sans",sans-serif;
+            family: f.getFont('input-font');
             weight: 400;
         }
 
-        outline: 0.3px solid #00000059;
+        color: f.getColor('text-color');
+
+        outline: 0.3px solid f.getColor('input-outline');
         border-radius: 5px;
         letter-spacing: .5px;
 
-        transition: outline .3s, background .3s;
+        transition: outline .3s;
+        background-color: f.getColor('input-bg');
 
         &::placeholder {
             font-weight: 400;
-            color: #000;
+            color: f.getColor('text-color');
         }
 
         &:focus {
-            background-color: #fbfbfb;
-            outline: 0.3px solid #00000088;
+            outline: 0.3px solid f.getColor('input-focus-outline');
         }
     }
 }

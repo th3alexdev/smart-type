@@ -24,8 +24,16 @@
     }
 
     &-container {
-        width: 45%;
-        padding: 0 15x;
+
+        width: 100%;
+        max-width: 450px;
+
+        @media (min-width: 800px) {
+            width: 45%;
+            max-width: none;
+        }
+
+        padding: 0 15px;
         display: flex;
         flex-direction: column;
         gap: 38px;
@@ -52,6 +60,6 @@
         left: 0;
         width:  100%;
         height: 1px;
-        background-color: #00000020;
+        background-color: f.getColor('line-color-tertiary');
     }
 }

@@ -4,16 +4,32 @@
 
 .header {
     width: 100%;
-    padding: 25px 95px;
+    padding: 25px 18px;
     display: flex;
     justify-content: center;
     background-color: f.getColor("header-bg");
     border-bottom: 1px solid #00000010;
+    color: f.getColor('text-color');
+
+    @media(min-width: 600px) and (max-width: 799px) {
+        padding: 25px 35px;
+    }
+
+    @media(min-width: 800px) {
+        padding: 25px 95px;
+    }
 
     &-container {
         width: 100%;
         max-width: 950px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+    }
+
+    &__bars-btn {
+        @media (min-width: 810px) {
+            display: none;
+        }
     }
 }
