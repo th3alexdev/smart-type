@@ -1,0 +1,31 @@
+@use "../utils/variables" as v;
+@use "../utils/functions" as f;
+@use "../utils/mixins" as m;
+
+.empty {
+    width: 100%;
+    height: calc(100vh - 300px);
+    display: grid;
+    place-items: center;
+    opacity: 75%;
+
+    user-select: none;
+    pointer-events: none;
+
+    &-container {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+    }
+
+    &__title {
+        font-size: 1.2rem;
+        font-weight: 500;
+        font-family: f.getFont('sec-font');
+    }
+
+    &__img {
+        width: 130px;
+    }
+}
