@@ -1,28 +1,32 @@
 import React from 'react'
+import { IconContext } from 'react-icons';
+import { MdAdd } from "react-icons/md"
 
-function HeaderNav({ setSection, setShowSection }) {
+function HeaderNav({ setCurrentSection, setShowSection, openNav, setOpenNav }) {
+  const toggleNav = () => {
+    setOpenNav(!openNav)
+  }
 
-  const sectionHandler = (e) => {
-    setSection(e.target.dataset.section)
+  const setSectionHandler = (e) => {
+    toggleNav()
+    setCurrentSection(e.currentTarget.dataset.section);
     setShowSection(true)
 
-    const navItems = document.querySelectorAll('.nav-list__item');
-    navItems.forEach(item => {
-      item.querySelector('a').classList.remove('nav-header-active');
-    });
+    const activeItem = document.querySelector('.nav-list__item a.nav-header-active');
+    activeItem?.classList.remove('nav-header-active');
   
     e.target.classList.add('nav-header-active');
   }
 
   return (
-    <nav className="nav">
+    <nav className={`nav ${openNav && "nav--active"}`}>
       <ul className="nav-list">
         <li className="nav-list__item">
           <a 
             href="#shortcuts" 
             className="link nav-header-active"
             data-section="home"
-            onClick={((e) => sectionHandler(e))}
+            onClick={((e) => setSectionHandler(e))}
           >Your shortcuts</a>
         </li>
         <li className="nav-list__item">
@@ -30,7 +34,7 @@ function HeaderNav({ setSection, setShowSection }) {
             href="#test" 
             className="link"
             data-section="test"
-            onClick={((e) => sectionHandler(e))}
+            onClick={((e) => setSectionHandler(e))}
           >Test your shortcuts</a>
         </li>
         <li className="nav-list__item">
@@ -38,10 +42,16 @@ function HeaderNav({ setSection, setShowSection }) {
             href="#manage"
             className="link"
             data-section="manage"
-            onClick={((e) => sectionHandler(e))}
+            onClick={((e) => setSectionHandler(e))}
           >Manage shortcuts</a>
         </li>
       </ul>
+      <IconContext.Provider value={{ color: "#222", className: "icon btn" }}>
+        <MdAdd 
+          className="btn btn-cross nav__cross-btn"
+          onClick={ () => toggleNav() }
+        />
+      </IconContext.Provider>
     </nav>
   )
 }
