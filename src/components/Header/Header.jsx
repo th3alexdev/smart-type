@@ -1,7 +1,11 @@
 import React from 'react'
-import { FaBars } from 'react-icons/fa';
+import { BarsButton } from "../../routes"
 
-function Header({ children }) {
+function Header({ children, openNav, setOpenNav }) {
+  const toggleNav = () => {
+    setOpenNav(!openNav)
+  }
+
   return (
     <header className="header">
       <div className="header-container">
@@ -11,11 +15,13 @@ function Header({ children }) {
             href="#"
             className="link"
             >
-            SmartTypes
+            SmartType
           </a>
         </h1>
 
         { children }
+
+        <BarsButton openNavHandler={ toggleNav } />
       </div>
     </header>
   )
