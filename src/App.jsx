@@ -1,26 +1,34 @@
-import React, { useState, useEffect} from "react"
+import React, { useState } from "react"
 import "./scss/styles.scss"
 import {
         Header,
         HeaderNav,
         Section
        } from "./routes"
+import { Toaster } from "react-hot-toast"; 
       
 function App() {
-  const [section, setSection] = useState("home");
+  const [currentSection, setCurrentSection] = useState("home");
   const [showSection, setShowSection] = useState(false);
+  const [openNav, setOpenNav] = useState(false);
 
   return (
     <>
-      <Header>
+      <Toaster />
+      <Header
+        openNav={ openNav }
+        setOpenNav={ setOpenNav }
+      >
         <HeaderNav 
-          setSection={ setSection }
+          openNav={ openNav }
+          setOpenNav={ setOpenNav }
+          setCurrentSection={ setCurrentSection }
           setShowSection={ setShowSection }
         />
       </Header> 
       <main className="main">
         <Section 
-          section={ section }
+          currentSection={ currentSection }
           showSection={ showSection }
         />
       </main>
