@@ -1,31 +1,31 @@
-import React from 'react'
-import ReactDOM from 'react-dom';
-import { IconContext } from 'react-icons';
+import React from "react"
+import ReactDOM from "react-dom";
+import { IconContext } from "react-icons";
 import { MdAdd } from "react-icons/md"
 
-function Modal({ children, setOpenModal }) {
+function Modal({ children, closeModal }) {
 
-  const closeModal = () => {
-    setOpenModal(false)
-  }
+  const handleModalClose = () => {
+    closeModal && closeModal();
+  };
  
   return ReactDOM.createPortal (
     <>
       <div className="modal">
       <IconContext.Provider value={{ color: "#222", className: "icon btn" }}>
         <MdAdd 
-          className="modal__close-btn"
-          onClick={ closeModal }
+          className="btn btn-cross"
+          onClick={ handleModalClose }
         />
       </IconContext.Provider>
         { children }
       </div>
       <div 
         className="shadow"
-        onClick={ closeModal }
+        onClick={ handleModalClose }
       ></div>
     </>,
-    document.getElementById('modal')
+    document.getElementById("modal")
   )
 }
 
