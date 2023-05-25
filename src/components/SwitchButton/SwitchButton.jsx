@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react"
 
-function SwitchButton() {
+function SwitchButton({ darkTheme, setDarkTheme }) {
+  const toggleTheme = () => {
+    setDarkTheme(!darkTheme);
+    document.body.classList.toggle("dark-mode");
+  };
+
   return (
     <label className="switch">
-      <input type="checkbox" />
+      <input 
+        type="checkbox" 
+        onChange={ toggleTheme } 
+        checked={ darkTheme } 
+      />
       <span className="slider round"></span>
     </label>
   )
