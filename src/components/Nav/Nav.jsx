@@ -1,17 +1,16 @@
-import React from 'react'
+import React from "react"
 
-function Nav({ setSortBy, setShowItems }) {
+function Nav({ setSortBy }) {
 
   const sectionHandler = (e) => {
-    setSortBy(e.target.dataset.section)
-    setShowItems(true)
+    setSortBy(e.target.dataset.nav)
 
-    const navItems = document.querySelectorAll('.nav-list__item');
+    const navItems = document.querySelectorAll(".nav-list__item");
     navItems.forEach(item => {
-      item.querySelector('a').classList.remove('nav-active');
+      item.querySelector("a").classList.remove("nav-active");
     });
   
-    e.target.classList.add('nav-active');
+    e.target.classList.add("nav-active");
   }
 
   return (
@@ -21,7 +20,7 @@ function Nav({ setSortBy, setShowItems }) {
           <a 
             href="#" 
             className="link nav-active"
-            data-section="recently-added"
+            data-nav="recently-added"
             onClick={((e) => sectionHandler(e))}
           >Recently Added</a>
         </li>
@@ -29,7 +28,7 @@ function Nav({ setSortBy, setShowItems }) {
           <a 
             href="#" 
             className="link"
-            data-section="recently-used"
+            data-nav="recently-used"
             onClick={((e) => sectionHandler(e))}
           >Recently Used</a>
         </li>
@@ -37,7 +36,7 @@ function Nav({ setSortBy, setShowItems }) {
           <a 
             href="#"
             className="link"
-            data-section="most-used"
+            data-nav="most-used"
             onClick={((e) => sectionHandler(e))}
           >Most used</a>
         </li>
