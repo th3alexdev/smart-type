@@ -2,7 +2,6 @@
 @use "../utils/functions" as f;
 @use "../utils/mixins" as m;
 
-
 .dd {
     display: inline-block;
     position: relative;
@@ -76,6 +75,7 @@
     white-space: nowrap;
     display: flex;
     justify-content: center;
+    opacity: 75%;
 }
 
 .dd-menu .dd-menu__item:hover {
@@ -85,4 +85,15 @@
 .dd-menu .dd-menu__item.divider{
     padding: 0;
     border-bottom: 1px solid #cccccc;
+}
+
+.dd-nav {
+    font-weight: 500;
+    font-family: f.getFont('main-font');
+    justify-content: center;
+    align-items: center;
+
+    @media(min-width: 1000px) {
+        display: none;
+    }
 }
