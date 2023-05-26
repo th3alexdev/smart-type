@@ -1,125 +1,59 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react"
+
 import { 
-        Nav, 
-        Form, 
-        MainButton,
-        SecButton,
-        SwitchButton,
-        DropButton,
-        Modal,
-        SortedList
-      }  from '../../routes'
-import { IconContext } from 'react-icons';
-import { MdOutlineAdd } from "react-icons/md";
-import Manager from '../../classes/ShortcutsManager';
+  ManageSection,
+  TestSection, 
+  ShortcutsSection
+} from "./components/routes";
 
-function Section({ section, showSection}) {
+import { ShortcutsProvider } from "../context/ShortcutsProvider";
+import { SORT_TYPES } from "../../constants/sortTypes"
 
-  let allShortcuts = Manager.getAllShortcuts
+function Section({ currentSection, showSection }) {
 
-  const [sortBy, setSortBy] = useState("recently-added");
-  const [showItems, setShowItems] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("/"); // change to activeOption
+  const [sortBy, setSortBy] = useState(SORT_TYPES.RECENTLY_ADDED);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(false);
 
   return (
+    <ShortcutsProvider>
     <section className="section">
       {
-
-        !showSection || section == "home" ? (
-          /* Your shorctus [Section] */
-          <>
-            <div className="section-flex">
-              <Nav setSortBy={ setSortBy } setShowItems={ setShowItems } />
-              <MainButton cta="Add New Shortcut" setOpenModal={ setOpenModal }>
-                <IconContext.Provider value={{ color: "white", className: "icon" }}>
-                  <MdOutlineAdd /> 
-                </IconContext.Provider>
-              </MainButton>
+         !showSection || currentSection === "home" ? (
+          // Your shortcuts [Section]
+          <ShortcutsSection
+            {...
               {
-                openModal && (
-                  <Modal setOpenModal={ setOpenModal }>
-                    <Form 
-                      placeholder="Type here"
-                      title="Enter your shortcut"
-                      renderAdditionalInputs={ true }
-                      setOpenModal={ setOpenModal }
-                    />
-                  </Modal>
-              )
+                sortBy,
+                setSortBy,
+                setIsModalOpen,
+                isModalOpen,
+                selectedOption
+              }
             }
+          />  
 
-            </div>
-            <div className="hr"></div>
-            <SortedList 
-              allShortcuts={ allShortcuts } 
-              showItems={ showItems }
-              sortBy={ sortBy }
-            />
-          </> 
+        ) : currentSection === "test" ? (
+          // Test your shortcuts [Section]
+          <TestSection /> 
 
-          ) : (
-            section == "test" ? ( 
-          
-            /* Test your shortcuts [Section] */
-              <>
-                <div className="pills-container">
-                  <h2 className="title title--thirtiary">Try</h2>
-                  {
-                    allShortcuts.map((el, key) => (
-                      <div key={ key } className="pill">{`${el.shortcut}${el.name}`}</div>
-                    ))
-                  }
-                </div>
+        ) : (
+          // Manage shortcuts [Section] 
+          <ManageSection
+            {...
+              {
+                setSelectedOption,
+                selectedOption,
+                darkTheme,
+                setDarkTheme,
+              }
+            }
+          /> 
 
-                <Form
-                  placeholder="Type here your shortcut"
-                  title="Test your shortcuts"
-                  allShortcuts={ allShortcuts }
-                >
-                </Form>
-              </>
-
-            ) : (
-              /* Manage shortcuts [Section] */
-                <div className="section-center">
-                  <h1 className="title title--principal  settings__title">Settings</h1>
-                  <div className="settings-container">
-                    <div className="settings__item">
-                      <h2 className="title title--subtitle">
-                        Command
-                      </h2>
-                      <DropButton 
-                        allShortcuts={ allShortcuts }
-                      />
-                    </div>    
-                    <div className="settings__item">
-                      <h2 className="title title--subtitle">
-                        Night Mode
-                      </h2>
-                      <SwitchButton />
-                    </div>    
-                    <div className="settings__item">
-                      <h2 className="title title--subtitle">
-                        Import Shortcuts
-                      </h2>
-                      <SecButton
-                        cta="Import"
-                      />
-                    </div>                 
-                    <div className="settings__item">
-                      <h2 className="title title--subtitle">
-                        Export Shortcuts
-                      </h2>
-                      <SecButton
-                        cta="Export"
-                      />
-                    </div>                 
-                  </div>
-                </div>
-            )
-          )
-      }
+        )}
     </section>
+    </ShortcutsProvider>
   )
 }
 
