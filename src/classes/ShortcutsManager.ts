@@ -12,13 +12,31 @@ class ShortcutsManager {
     }
 
     removeShortcut( shortcutName: string ): void {
-        // this.shortcuts = this.shortcuts.filter(
-            // (shortcut) => shortcut.name !== shortcutName
-        // );
+        this.shortcuts = this.shortcuts.filter((shortcut) => {
+            return shortcut.getName !== shortcutName;
+        });
+        console.log(this.shortcuts)
     }
 
-    importShorcuts(): void {
-        return
+    editShortcut({ 
+        fullShortcut,
+        name,
+        description,
+        expansion
+    }: {
+        fullShortcut: Shortcut;
+        name?: string;
+        description?: string;
+        expansion?: string
+    }): void {
+
+        name && (fullShortcut.setName = name);
+        description && (fullShortcut.setDescription = description);
+        expansion && (fullShortcut.setExpansion = expansion);
+    }
+
+    importShortcuts(shortcuts: any): void {
+        this.shortcuts = shortcuts;
     }
 
     exportShortcuts(): void {
