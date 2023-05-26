@@ -1,28 +1,20 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef, useEffect} from "react";
 import { ShortcutsContext } from "../context/ShortcutsProvider";
 
-function DropButton({ options , setSelectedOption, selectedOption }) {
+function DropButton({ selectedOption, children, className }) {
   const { allShortcuts } = useContext(ShortcutsContext)
 
-  const [open, setOpen] = useState(false)
-
-  const selectOption = (option) => {
-    allShortcuts.forEach(shortcut => shortcut.setShortcut(option))
-    setSelectedOption(option);
-  }
-
-  const handleOpen = () => {
-    setOpen(!open);
-  };
+  const [isOpen, setIsOpen] = useState(false)
+  const dropdownRef = useRef(null);
 
   return (
     <>
-      <label className="dd" htmlFor="test">
+      <label className={`dd ${className && className}`} htmlFor="test" ref={ dropdownRef }>
         <p className="dd__placeholder"> 
           { selectedOption }
           <span 
             className={ 
-              open 
+              isOpen 
               ? "dd__placeholder-icon dd__placeholder-icon--open" 
               : "dd__placeholder-icon" 
             }
@@ -33,25 +25,14 @@ function DropButton({ options , setSelectedOption, selectedOption }) {
           type="checkbox"
           className="dd__input" 
           id="test" 
-          onClick={ handleOpen }
+          onClick={ () => setIsOpen(!isOpen) }
+          defaultChecked={ isOpen }
         />
 
         {
-          open && (
+          isOpen && (
             <ul className="dd-menu">
-            {
-              options.map((option, key) => (
-                option !== selectedOption && (
-                <li 
-                  className="dd-menu__item" 
-                  key={key}
-                  onClick={() => selectOption(option)}
-                >
-                  { option }
-                </li>
-                )
-              ))
-            }
+              { children }
             </ul>
           )
         }
