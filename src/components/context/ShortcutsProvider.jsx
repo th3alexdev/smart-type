@@ -2,8 +2,6 @@ import React, { createContext, useState, useEffect } from "react"
 import Manager from "../../classes/ShortcutsManager";
 export const ShortcutsContext = createContext();
 
-
-
 export const ShortcutsProvider = ({ children }) => {
   const [allShortcuts, setAllShortcuts] = useState([]);
 
