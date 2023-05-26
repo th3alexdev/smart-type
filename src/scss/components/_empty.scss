@@ -23,9 +23,16 @@
         font-size: 1.2rem;
         font-weight: 500;
         font-family: f.getFont('sec-font');
+        color: f.getColor('text-color');
     }
 
     &__img {
         width: 130px;
+    }
+}
+
+.dark-mode {
+    .empty__img {
+        filter: invert(1)
     }
 }
