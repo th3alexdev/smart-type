@@ -1,44 +1,57 @@
-import React from 'react'
-import { Card } from "../../routes"
+import React, { useState, useContext } from "react"
 
-function SortedList({ allShortcuts, sortBy, showItems }) {
+import { SORT_TYPES } from "../../constants/sortTypes";
+import { createCardElement } from "../../helpers/cardHelpers";
+import { EmptyCardList } from "../../routes"
+import { ShortcutsContext } from "../context/ShortcutsProvider";
+
+function SortedList({ sortBy }) {
+    const { allShortcuts, setAllShortcuts } = useContext(ShortcutsContext);
+    const [openCards, setOpenCards] = useState({});
 
     const sortedShortcuts = [...allShortcuts];
+    
+    const isListEmpty = sortedShortcuts.length === 0;
 
-    if (sortBy === "recently-used") {
-        sortedShortcuts.sort((a, b) => {
-            const dateA = new Date(a.lastUsedDate);
-            const dateB = new Date(b.lastUsedDate);
-            return dateB.getTime() - dateA.getTime();
-        });
+    const sortShortcuts = () => {
+        if(sortBy === SORT_TYPES.RECENTLY_USED) {
+            sortedShortcuts.sort((a, b) => {
+                const dateA = new Date(a.lastUsedDate);
+                const dateB = new Date(b.lastUsedDate);
+                return dateB.getTime() - dateA.getTime();
+            }); 
 
-        if (sortedShortcuts.length === 0 || sortedShortcuts.every((el) => el.   lastUsedDate === undefined)) {
-            return null;
+        } else if(sortBy === SORT_TYPES.MOST_USED) {
+            sortedShortcuts.sort((a, b) => b.timesUsed - a.timesUsed);
         }
-
-    } else if(sortBy === "most-used") {
-        sortedShortcuts.sort((a, b) => b.timesUsed - a.timesUsed);
     } 
 
+    sortShortcuts()
 
   return (
-    <div className="cards-container">
-            <>
-                {
-                sortedShortcuts.map( (el, key) => (
-                    <Card 
-                        shortcut={`${el.shortcut}${el.name}`}
-                        description={ el.description }
-                        lastUsedDate={ el.lastUsedDate !== undefined ? el.formatTime(el.lastUsedDate) : null }
-                        timesUsed={ el.timesUsed }
-                        key={ key }
-                    >
-                    </Card>
-                ))
-                }
-            </>
+    <>
+        {
+            isListEmpty ? (
+                <EmptyCardList 
+                    title="No shortcuts to show!"
+                />
+            ) : (
 
-    </div>
+            <div className="cards-container">
+                {
+                    sortedShortcuts.map((el, key) => (
+                        sortBy === SORT_TYPES.RECENTLY_USED && el.lastUsedDate === undefined 
+                            ? <EmptyCardList 
+                                title="No shortcuts used yet!"
+                              />
+                            : createCardElement({ el, key, openCards, setOpenCards, setAllShortcuts })
+                        )
+                    )
+                }
+            </div>
+            )
+        }
+    </>
   )
 }
 
