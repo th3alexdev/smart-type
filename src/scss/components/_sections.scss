@@ -7,8 +7,22 @@
 
     &-flex {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
+        gap: 15px;
+        padding-bottom: 24px;
+
+        @media(min-width: 425px) {
+            flex-direction: row;
+            align-items: center;
+            gap: 0;
+            padding-bottom: 16px;
+        }
+
+        @media(min-width: 1000px) {
+            padding-bottom: 2px;
+        }
     }
 
     &-center {
