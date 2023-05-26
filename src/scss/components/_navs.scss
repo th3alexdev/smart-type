@@ -25,8 +25,8 @@
 
     &-list {
         display: flex;
-
         /* desktop */
+
         @media (min-width: 810px) and (max-width: 849px) {
             gap: 15px;
         }
@@ -34,6 +34,7 @@
             gap: 35px;
         }
         
+
 
         /* mobile */
         @media (max-width: 809px) {
@@ -101,6 +102,13 @@
     &__cross-btn {
         @media (min-width: 810px) {
             display: none;
+        }
+    }
+
+    &-secondary {
+        display: none;
+        @media(min-width: 1000px) {
+            display: flex;
         }
     }
 }
