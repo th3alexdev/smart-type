@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react"
 import { SORT_TYPES } from "../../constants/sortTypes";
 import { createCardElement } from "../../helpers/cardHelpers";
 import { EmptyCardList } from "../../routes"
-import { ShortcutsContext } from "../context/ShortcutsProvider";
+import { ShortcutsContext } from "../../context/ShortcutsProvider";
 
 function SortedList({ sortBy }) {
     const { allShortcuts, setAllShortcuts } = useContext(ShortcutsContext);

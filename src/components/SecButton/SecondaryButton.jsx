@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { ShortcutsContext } from '../context/ShortcutsProvider';
+import { ShortcutsContext } from '../../context/ShortcutsProvider';
 import { handleImportExport } from "../../helpers/handleImportExport";
 import Manager from "../../classes/ShortcutsManager";
 

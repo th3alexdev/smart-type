@@ -1,5 +1,5 @@
 import React, { useState, useContext, useRef, useEffect} from "react";
-import { ShortcutsContext } from "../context/ShortcutsProvider";
+import { ShortcutsContext } from "../../context/ShortcutsProvider";
 
 function DropButton({ selectedOption, children, className }) {
   const { allShortcuts } = useContext(ShortcutsContext)

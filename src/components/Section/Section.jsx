@@ -6,7 +6,7 @@ import {
   ShortcutsSection
 } from "./components/routes";
 
-import { ShortcutsProvider } from "../context/ShortcutsProvider";
+import { ShortcutsProvider } from "../../context/ShortcutsProvider";
 import { SORT_TYPES } from "../../constants/sortTypes"
 
 function Section({ currentSection, showSection }) {
