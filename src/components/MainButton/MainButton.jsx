@@ -12,7 +12,7 @@ function MainButton({ cta, children, openModal }) {
       onClick={ openModal ? () => { modalHandler() } : null }
     >
       { children }
-      { cta }
+      <span className="btn-main__text">{ cta }</span>
     </button>
   )
 }
