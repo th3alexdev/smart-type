@@ -1,8 +1,10 @@
-import React from 'react'
-import { IconContext } from 'react-icons';
+import React from "react"
+import { IconContext } from "react-icons";
 import { MdAdd } from "react-icons/md"
+import { Link } from "react-router-dom";
 
-function HeaderNav({ setCurrentSection, setShowSection, openNav, setOpenNav }) {
+function HeaderNav({ setCurrentSection, openNav, setOpenNav, currentSection }) {
+
   const toggleNav = () => {
     setOpenNav(!openNav)
   }
@@ -10,43 +12,37 @@ function HeaderNav({ setCurrentSection, setShowSection, openNav, setOpenNav }) {
   const setSectionHandler = (e) => {
     toggleNav()
     setCurrentSection(e.currentTarget.dataset.section);
-    setShowSection(true)
-
-    const activeItem = document.querySelector('.nav-list__item a.nav-header-active');
-    activeItem?.classList.remove('nav-header-active');
-  
-    e.target.classList.add('nav-header-active');
   }
 
   return (
-    <nav className={`nav ${openNav && "nav--active"}`}>
+    <nav className={ openNav ? "nav nav--active" : "nav"}>
       <ul className="nav-list">
         <li className="nav-list__item">
-          <a 
-            href="#shortcuts" 
-            className="link nav-header-active"
-            data-section="home"
+          <Link 
+            to="/home" 
+            className={`link ${currentSection === "/home" && "nav-header-active"}`}
+            data-section="/home"
             onClick={((e) => setSectionHandler(e))}
-          >Your shortcuts</a>
+          >Your shortcuts</Link>
         </li>
         <li className="nav-list__item">
-          <a 
-            href="#test" 
-            className="link"
-            data-section="test"
+          <Link
+            to="/test" 
+            className={`link ${currentSection === "/test" && "nav-header-active"}`}
+            data-section="/test"
             onClick={((e) => setSectionHandler(e))}
-          >Test your shortcuts</a>
+          >Test your shortcuts</Link>
         </li>
         <li className="nav-list__item">
-          <a 
-            href="#manage"
-            className="link"
-            data-section="manage"
+          <Link 
+            to="/manage"
+            className={ currentSection === "/manage" ? "link nav-header-active" : "link" }
+            data-section="/manage"
             onClick={((e) => setSectionHandler(e))}
-          >Manage shortcuts</a>
+          >Manage shortcuts</Link>
         </li>
       </ul>
-      <IconContext.Provider value={{ color: "#222", className: "icon btn" }}>
+      <IconContext.Provider value={{ color: "var(--color-icon-color)", className: "icon btn" }}>
         <MdAdd 
           className="btn btn-cross nav__cross-btn"
           onClick={ () => toggleNav() }
