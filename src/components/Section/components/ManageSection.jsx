@@ -5,7 +5,7 @@ import {
     SwitchButton
 } from "../../../routes";
 
-function ManageSection({ setSelectedOption, selectedOption, darkTheme, setDarkTheme }) {
+function ManageSection({ setSelectedOption, selectedOption, darkTheme, toggleDarkTheme }) {
 
   const [selectedCommand, setSelectedCommand] = useState("/")
 
@@ -48,8 +48,8 @@ function ManageSection({ setSelectedOption, selectedOption, darkTheme, setDarkTh
             <div className="settings__item">
                 <h2 className="title title--subtitle"> Night Mode </h2>
                 <SwitchButton 
-                    darkTheme={ darkTheme }
-                    setDarkTheme={ setDarkTheme }
+                    checked={ darkTheme }
+                    onChange={ toggleDarkTheme }
                 />
             </div>    
             <div className="settings__item">
