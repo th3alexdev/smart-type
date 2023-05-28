@@ -1,16 +1,43 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./scss/styles.scss"
 import {
         Header,
         HeaderNav,
         Section
        } from "./routes"
-import { Toaster } from "react-hot-toast"; 
-      
+import { Toaster } from "react-hot-toast";
+import { useLocation } from "react-router-dom";
+
 function App() {
-  const [currentSection, setCurrentSection] = useState("home");
-  const [showSection, setShowSection] = useState(false);
+  const location = useLocation()
+
+  const [currentSection, setCurrentSection] = useState(location.pathname);
   const [openNav, setOpenNav] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(false);
+
+  useEffect(() => {
+    const darkModeEnabled = JSON.parse(localStorage.getItem("darkModeEnabled"));
+
+    if (darkModeEnabled === null) setDarkTheme(false)
+    else {
+      setDarkTheme(darkModeEnabled);
+      toggleDarkTheme(darkModeEnabled)
+    }
+    console.log(currentSection)
+  }, []);
+
+  const toggleDarkTheme = (enabled) => {
+    const body = document.body;
+  
+    if (enabled) body.classList.add("dark-mode");
+    else body.classList.remove("dark-mode");
+  };
+
+  const handleToggleDarkTheme = () => {
+    setDarkTheme(!darkTheme)
+    toggleDarkTheme(!darkTheme)
+    localStorage.setItem("darkModeEnabled", !darkTheme);
+  };
 
   return (
     <>
@@ -22,14 +49,14 @@ function App() {
         <HeaderNav 
           openNav={ openNav }
           setOpenNav={ setOpenNav }
+          currentSection={ currentSection }
           setCurrentSection={ setCurrentSection }
-          setShowSection={ setShowSection }
         />
       </Header> 
       <main className="main">
         <Section 
-          currentSection={ currentSection }
-          showSection={ showSection }
+          toggleDarkTheme={ handleToggleDarkTheme }
+          darkTheme={ darkTheme }
         />
       </main>
     </>
