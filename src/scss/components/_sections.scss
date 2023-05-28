@@ -7,14 +7,12 @@
 
     &-flex {
         display: flex;
-        flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
         gap: 15px;
-        padding-bottom: 24px;
+        padding-bottom: 12px;
 
         @media(min-width: 425px) {
-            flex-direction: row;
             align-items: center;
             gap: 0;
             padding-bottom: 16px;
