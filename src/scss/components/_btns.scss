@@ -8,7 +8,6 @@
 }
 
 .btn-main {
-
     height: 40px;
     padding: 0 15px;
     
@@ -33,6 +32,13 @@
     &:disabled {
         cursor: context-menu;
         filter: opacity(35%);
+    }
+
+    &__text {
+        display: none;
+        @media(min-width: 425px){
+            display: inline-block;
+        }
     }
 }
 
@@ -70,6 +76,7 @@
     transform: rotate(45deg);
     border-radius: 50%;
     transition: background .3s;
+    color: f.getColor('icon-color');
 
     &:hover {
         background-color: f.getColor('pill-bg');
