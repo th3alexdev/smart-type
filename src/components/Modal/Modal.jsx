@@ -12,7 +12,7 @@ function Modal({ children, closeModal }) {
   return ReactDOM.createPortal (
     <>
       <div className="modal">
-      <IconContext.Provider value={{ color: "#222", className: "icon btn" }}>
+      <IconContext.Provider value={{ color: "var(--color-icon-color)", className: "icon btn" }}>
         <MdAdd 
           className="btn btn-cross"
           onClick={ handleModalClose }
