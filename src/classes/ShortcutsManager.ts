@@ -7,6 +7,10 @@ class ShortcutsManager {
         this.shortcuts = [];
     }
 
+    saveInStorage() {
+        localStorage
+    }
+
     addShortcut( shortcut: Shortcut ): void {
         this.shortcuts.push( shortcut );
     }
@@ -15,7 +19,6 @@ class ShortcutsManager {
         this.shortcuts = this.shortcuts.filter((shortcut) => {
             return shortcut.getName !== shortcutName;
         });
-        console.log(this.shortcuts)
     }
 
     editShortcut({ 

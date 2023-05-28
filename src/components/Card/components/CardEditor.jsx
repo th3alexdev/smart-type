@@ -38,7 +38,6 @@ function CardEditor({
     setAllShortcuts(Manager.getAllShortcuts)
     closeCard()
     console.log(data)
-    console.log(errors)
   };
 
   const handleInputChange = (e) => {
@@ -50,6 +49,20 @@ function CardEditor({
   const descriptionField = useField({ errors, tag: "input", type: "text" , inputName: "description" })
   const expansionField = useField({ errors, tag: "textarea", type: "text" , inputName: "expansion" })
 
+  const formatExpansionContent = (content) => {
+    const lines = content.split('\n');
+    const formattedLines = lines.map((line, index) => {
+      let indentedLine = line.replace(/\t/g, '\u00A0\u00A0\u00A0\u00A0'); 
+      return (
+        <React.Fragment key={index}>
+          {indentedLine}
+          <br />
+        </React.Fragment>
+      );
+    });
+    return formattedLines;
+  };
+
   return (
       <form 
         className="card card--opened"
@@ -57,12 +70,19 @@ function CardEditor({
         key={ key }
       >
         <input 
+          type="hidden" 
+          defaultValue={ name }
+          disabled
+          {...register("originalName", {
+            value: name
+          })}
+        />
+        <input 
           placeholder={ shortcut }
           className="form-command form__input" 
           type="text" 
           disabled
         />
-        
         <input 
           { ...nameField }
           type="text" 
@@ -95,11 +115,12 @@ function CardEditor({
           onKeyDown={(e) => keyHandler(e)}
           onPaste={(e) => pasteHandler(e)}
           onInput={(e) => handleInputChange(e) }
-          dangerouslySetInnerHTML={{ __html: expansion }}
           {...register("expansion", {
-            required: true
+            required: true,
           })}
-        ></p>
+        >
+          { formatExpansionContent(expansion) }
+        </p>
 
         <StatsPills
           { ...{ timesUsed, lastUsedDate } }
@@ -113,7 +134,7 @@ function CardEditor({
         />
         <SaveButton />
         {
-          (isDirty || !isValid) && (
+          ( !errors ) && (
             <ul className="form-errors">
             {
               errors?.name && !errors && (
