@@ -1,9 +1,13 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { DropButton } from "../../routes";
 import { SORT_TYPES } from "../../constants/sortTypes";
+import { ShortcutsContext } from "../../context/ShortcutsProvider";
 
 function Nav({ setSortBy }) {
+  const { setCardIsOpen } = useContext(ShortcutsContext)
+
   const sectionHandler = (e) => {
+    setCardIsOpen(false)
     setSortBy(e.target.dataset.nav)
 
     const navItems = document.querySelectorAll(".nav-list__item");
@@ -42,7 +46,7 @@ function Nav({ setSortBy }) {
                 >
                   <a 
                     className="link" 
-                    href="#"
+                    href="/"
                     onClick={ (e) => sectionHandler(e) }
                     data-nav={ link.nav }
                   >{ link.label }</a>
