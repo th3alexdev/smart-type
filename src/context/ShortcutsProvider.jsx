@@ -4,6 +4,7 @@ export const ShortcutsContext = createContext();
 
 export const ShortcutsProvider = ({ children }) => {
   const [allShortcuts, setAllShortcuts] = useState([]);
+  const [cardIsOpen, setCardIsOpen] = useState(false);
 
   useEffect(() => {
     const shortcuts = Manager.getAllShortcuts;
@@ -11,7 +12,7 @@ export const ShortcutsProvider = ({ children }) => {
   }, []);
 
   return (
-    <ShortcutsContext.Provider value={{ allShortcuts, setAllShortcuts }}>
+    <ShortcutsContext.Provider value={{ allShortcuts, setAllShortcuts, cardIsOpen, setCardIsOpen }}>
       { children }
     </ShortcutsContext.Provider>
   )
