@@ -7,8 +7,8 @@ function SecButton({ cta }) {
   const { allShortcuts, setAllShortcuts } = useContext(ShortcutsContext);
   
   const handleClick = () => {
-    handleImportExport(cta, allShortcuts);
-    setAllShortcuts(Manager.getAllShortcuts)
+    handleImportExport(cta, allShortcuts, setAllShortcuts);
+    setAllShortcuts(Manager.getAllShortcuts);
   }
 
   return (
