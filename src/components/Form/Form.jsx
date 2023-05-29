@@ -1,66 +1,57 @@
-import React, { useEffect, useRef }from "react"
+import React, { useRef, useContext } from "react"
 import { useForm } from "react-hook-form"
 
-import { onSubmit } from "../../utils/validators.js"
-import { keyHandler, pasteHandler } from "../../utils/keyHandler.js";
+import {
+  getErrorMessages,
+  keyHandler,
+  onSubmitAdd,
+  pasteHandler,
+  useField,
+  useLabel
+} from "../../utils/formUtils/routes"
 
-import { useField } from "../../hooks/useField.jsx";
-import { useLabel } from "../../hooks/useLabel.jsx";
+import Manager from "../../classes/ShortcutsManager";
 
-import Manager from "../../classes/ShortcutsManager.ts";
+import { ShortcutsContext } from '../../context/ShortcutsProvider';
 
-function Form({ title, placeholder, renderAdditionalInputs, setOpenModal, allShortcuts }) {
-  
+function Form({ title, placeholder, renderAdditionalInputs, setIsModalOpen, selectedOption }) {
+  const { setAllShortcuts } = useContext(ShortcutsContext);
   const textareaRef = useRef(null);
-  
+
   const { 
     register, 
-    formState: { errors, isValid, isDirty }, 
-    watch,
     handleSubmit,
-    formState: { isSubmitSuccessful }, 
-    reset,
-    setValue,
+    formState: { errors, isSubmitSuccessful }, 
     setError, 
-    clearErrors 
+    clearErrors,
+    setValue
   } = useForm();
-  
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      textareaRef.current.textContent = "";
-      reset();
-    }
-  }, [isSubmitSuccessful, reset]);
 
   const handleFormSubmit = (data) => {
     clearErrors()
-    onSubmit({ data, setError, setOpenModal, clearErrors });
+    setAllShortcuts(Manager.getAllShortcuts)
+    onSubmitAdd({ data, setError, clearErrors, setIsModalOpen });
   };
 
-  const handleInputChange = (e) => {
-    const inputValue = e.target.innerText;
+  const handleInputChange = () => {
+    const inputValue = textareaRef.current.innerHTML;
     setValue("expansion", inputValue); 
 
     if (!renderAdditionalInputs) {
       Manager.getAllShortcuts.forEach((shortcut) => {
-        // console.log(shortcut)
-        shortcut.expandShortcut(textareaRef.current, shortcut.name); // Expande los atajos en el div textarea
+        shortcut.expandShortcut(textareaRef.current, shortcut.name);
       });
     }
   };
 
-  let textareaDiv = watch("expansion");
-  
   const nameField = useField({ errors, tag: "input", type: "text" , inputName: "name" })
   const descriptionField = useField({ errors, tag: "input", type: "text" , inputName: "description" })
   const expansionField = useField({ errors, tag: "textarea", type: "text" , inputName: "expansion" })
-
   const nameLabel = useLabel({ errors, type: "normal", inputName: "name" })
   const descriptionLabel = useLabel({ errors, type: "large", inputName: "description" })
 
   return (
     <form className="form" onSubmit={ handleSubmit(handleFormSubmit) }>   
-
       <h1 className="title title-principal form__title">
         { title }                  
       </h1>
@@ -69,7 +60,8 @@ function Form({ title, placeholder, renderAdditionalInputs, setOpenModal, allSho
         renderAdditionalInputs && (
           <div className="form-inputs-container">
             <input 
-              placeholder="/" 
+              id="command"
+              placeholder={ selectedOption } 
               className="form-command form__input" 
               type="text" disabled 
             />
@@ -103,66 +95,57 @@ function Form({ title, placeholder, renderAdditionalInputs, setOpenModal, allSho
         )
       }
 
-      <p
-        contentEditable
-        type="text"
-        data-placeholder={ placeholder }
-        { ...expansionField }
-        onInput={(e) => handleInputChange(e) }
-        onKeyDown={(e) => keyHandler(e)}
-        ref={ textareaRef }
-        onPaste={(e) => pasteHandler(e)}
-      ></p>
+      <label htmlFor="expansion">
+        <p
+          contentEditable
+          id="expansion"
+          data-placeholder={ placeholder }
+          { ...expansionField }
+          {...register("expansion", {
+            required: true,
+          })}
+          onInput={ (e) => handleInputChange(e) }
+          onPaste={ (e) => pasteHandler(e) }
+          onKeyDown={ (e) => keyHandler(e) }
+          ref={ textareaRef }
+        ></p>
+      </label>
+
 
       {
         renderAdditionalInputs && (
           <>
-            {
-              (isDirty || !isValid) && (
-                <ul className="form-errors">
-                  { 
-                      errors.name?.type === "already exist" && (
-                        <li className="form-errors__item">
-                          { errors.name.message }
-                        </li>
-                      )
-                  }
-                  { 
-                      errors.description?.type === "maxLength" && (
-                        <li className="form-errors__item">
-                          Description cannot exceed 45 characters.
-                        </li>
-                      )
-                  }
-                  { 
-                      errors.name?.type === "maxLength" && (
-                        <li className="form-errors__item">
-                          Shortcut name cannot exceed 14 characters.
-                        </li>
-                      )
-                  }
-                  { 
-                    errors.description?.type === "minLength" || errors.name?.type === "minLength" && (
-                      <li className="form-errors__item">
-                         Shortcut/Description should have a minimum of 2 characters.
-                      </li>
-                    )
-                  }
-                  { 
-                    errors.name?.type === "pattern" && (
-                      <li className="form-errors__item">
-                        Shortcut name cannot contain spaces.
-                      </li>
-                    )
-                  }
-                </ul>
-              )
-            }
+        {
+          !isSubmitSuccessful && (
+            <ul className="form-errors">
+              {
+                errors && (
+                <>
+                  { errors?.name && (
+                    <li className="form-errors__item">
+                      { getErrorMessages(errors.name.type, "name") }
+                    </li>
+                  )}
+                  { errors?.description && (
+                    <li className="form-errors__item">
+                      c
+                      { getErrorMessages(errors.description.type, "description") }
+                    </li>
+                  )}
+                  { errors?.expansion && (
+                    <li className="form-errors__item">
+                      { getErrorMessages(errors.expansion.type, "expansion") }
+                    </li>
+                  )}
+                </>
+              )}
+            </ul>
+          )
+        }                
             <input 
               type="submit" 
               className="btn btn-main" 
               value="Add Shortcut"
-              disabled={ !textareaDiv }
             />
           </>
         )
