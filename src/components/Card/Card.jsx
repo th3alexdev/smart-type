@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useContext }from "react"
 import { IconContext } from "react-icons"
 
 import { CardEditor, CardPreview } from "./components/routes"
+import { ShortcutsContext } from "../../context/ShortcutsProvider";
 
 function Card( props ) {
-
+  
+  const { cardIsOpen } = useContext(ShortcutsContext);
   const { isOpen, setOpenCards, toggleCard, ...restProps } = props;
   
   const hideCardHandler = () => {
@@ -15,7 +17,7 @@ function Card( props ) {
    <>
     <IconContext.Provider value={{ color: "var(--color-icon-color)", className: "card-icon" }}>
     {
-      isOpen ? (
+      isOpen && cardIsOpen ? (
         <CardEditor
           { ...props }
           setOpenCards={ setOpenCards }
