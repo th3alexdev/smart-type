@@ -247,8 +247,7 @@
             }
 
             &:disabled {
-                background-color: red;
-                // background-color: f.getColor('modal-bg');
+                background-color: f.getColor('modal-bg');
             }
         }
         }
