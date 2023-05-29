@@ -23,7 +23,6 @@ function App() {
       setDarkTheme(darkModeEnabled);
       toggleDarkTheme(darkModeEnabled)
     }
-    console.log(currentSection)
   }, []);
 
   const toggleDarkTheme = (enabled) => {
