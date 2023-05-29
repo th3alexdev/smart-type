@@ -1,14 +1,20 @@
-import React from "react"
+import React, { useContext } from "react"
 
+import { ShortcutsContext } from "../../../context/ShortcutsProvider";
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { StatsPills } from "../../../routes"
  
-function CardPreview({ key, name, shortcut, description, expansion, timesUsed, lastUsedDate, openCard }) {
+function CardPreview({ cardKey, name, shortcut, description, expansion, timesUsed, lastUsedDate, openCard }) {
+  const { setCardIsOpen } = useContext(ShortcutsContext)
+
   return (
     <div 
       className="card"
-      onClick={ openCard }
-      key={ key }
+      onClick={ () => { 
+        openCard()
+        setCardIsOpen(true)
+      }}
+      key={ cardKey }
     >
         <h3 className="card__shortcut">{`${shortcut}${name}`}</h3>
           <h2 className="card__description">{ description }</h2>
