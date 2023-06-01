@@ -64,7 +64,7 @@ const Manager = new ShortcutsManager();
 const Testing = new Shortcut({
     name: "testing",
     description: "Proof of SmartTypes works",
-    expansion: `This is a proof \n of how this \n extension works 💛`
+    expansion: `This is a proof \nof how this \nextension works 💛`
 });
 
 Manager.addShortcut(Testing)
