@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Route, Routes } from "react-router-dom";
 
 import { 
@@ -7,7 +7,6 @@ import {
   ShortcutsSection
 } from "./components/routes";
 
-import { ShortcutsProvider } from "../../context/ShortcutsProvider";
 import { SORT_TYPES } from "../../constants/sortTypes"
 
 function Section({ toggleDarkTheme, darkTheme }) {
@@ -17,10 +16,10 @@ function Section({ toggleDarkTheme, darkTheme }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <ShortcutsProvider>
+    <>
       <section className="section">
         <Routes>
-          <Route path="/home" element={ (
+          <Route path={`/home`} element={ (
               <ShortcutsSection
               {...
                 {
@@ -48,7 +47,7 @@ function Section({ toggleDarkTheme, darkTheme }) {
           } />
         </Routes>
       </section>
-    </ShortcutsProvider>
+    </>
   )
 }
 
