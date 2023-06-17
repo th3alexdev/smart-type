@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import "./scss/styles.scss"
 import {
         Header,
@@ -7,17 +7,25 @@ import {
        } from "./routes"
 import { Toaster } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
+import { setDefaultShortcuts, loadShortcuts } from "./utils/loadShortcuts";
+import { ShortcutsContext } from "./context/ShortcutsProvider";
 
 function App() {
-  const location = useLocation()
+  const location = useLocation();
+  const { setAllShortcuts } = useContext(ShortcutsContext);
 
   const [currentSection, setCurrentSection] = useState(location.pathname);
   const [openNav, setOpenNav] = useState(false);
   const [darkTheme, setDarkTheme] = useState(false);
 
   useEffect(() => {
-    const darkModeEnabled = JSON.parse(localStorage.getItem("darkModeEnabled"));
+    const storedShortcuts = JSON.parse(localStorage.getItem("shortcuts"));
+    if (storedShortcuts === null) setDefaultShortcuts(setAllShortcuts);
+    else {
+      loadShortcuts(setAllShortcuts)
+    }
 
+    const darkModeEnabled = JSON.parse(localStorage.getItem("darkModeEnabled"));
     if (darkModeEnabled === null) setDarkTheme(false)
     else {
       setDarkTheme(darkModeEnabled);
