@@ -1,4 +1,5 @@
 import { Shortcut } from "./Shortcut";
+import { convertRegexToString } from "../utils/regexConverter";
 
 class ShortcutsManager {
     shortcuts: Array<Shortcut>;
@@ -8,7 +9,16 @@ class ShortcutsManager {
     }
 
     saveInStorage() {
-        localStorage
+        const shortcuts = Manager.getAllShortcuts.map((shortcut) => ({ ...shortcut }));
+        // console.log(shortcuts);
+      
+        shortcuts.forEach((shortcut) => {
+          convertRegexToString(shortcut);
+        });
+
+        // console.log(JSON.stringify(shortcuts))
+      
+        localStorage.setItem('shortcuts', JSON.stringify(shortcuts));
     }
 
     addShortcut( shortcut: Shortcut ): void {
@@ -36,6 +46,7 @@ class ShortcutsManager {
         name && (fullShortcut.setName = name);
         description && (fullShortcut.setDescription = description);
         expansion && (fullShortcut.setExpansion = expansion);
+        fullShortcut.resetShortcutsValues();
     }
 
     importShortcuts(shortcuts: any): void {
@@ -61,12 +72,5 @@ class ShortcutsManager {
 
 const Manager = new ShortcutsManager();
 
-const Testing = new Shortcut({
-    name: "testing",
-    description: "Proof of SmartTypes works",
-    expansion: `This is a proof \nof how this \nextension works 💛`
-});
-
-Manager.addShortcut(Testing)
 
 export default Manager;
