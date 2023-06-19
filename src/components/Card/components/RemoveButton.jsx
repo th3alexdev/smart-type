@@ -12,6 +12,7 @@ function RemoveButton({ shortcutName, setOpenCards }) {
     setOpenCards({})
     Manager.removeShortcut(shortcutName)
     setAllShortcuts(Manager.getAllShortcuts)
+    Manager.saveInStorage();
   };
 
   return (

@@ -11,7 +11,6 @@ import {
 } from "../../utils/formUtils/routes"
 
 import Manager from "../../classes/ShortcutsManager";
-
 import { ShortcutsContext } from '../../context/ShortcutsProvider';
 
 function Form({ title, placeholder, renderAdditionalInputs, setIsModalOpen, selectedOption }) {
@@ -31,6 +30,8 @@ function Form({ title, placeholder, renderAdditionalInputs, setIsModalOpen, sele
     clearErrors()
     setAllShortcuts(Manager.getAllShortcuts)
     onSubmitAdd({ data, setError, clearErrors, setIsModalOpen });
+    Manager.saveInStorage();
+    console.log(Manager.getAllShortcuts)
   };
 
   const handleInputChange = () => {
@@ -143,6 +144,7 @@ function Form({ title, placeholder, renderAdditionalInputs, setIsModalOpen, sele
           )
         }                
             <input 
+              id="addShortcut"
               type="submit" 
               className="btn btn-main" 
               value="Add Shortcut"
