@@ -26,9 +26,10 @@ function CardEditor({ key, name, shortcut, description, expansion, timesUsed, la
   const { setAllShortcuts } = useContext(ShortcutsContext)
 
   const handleFormSubmit = (data) => {
-    clearErrors()
+    clearErrors();
     onSubmitEdit({ data, setError, clearErrors, closeCard });
-    setAllShortcuts(Manager.getAllShortcuts)
+    setAllShortcuts(Manager.getAllShortcuts);
+    Manager.saveInStorage();
   };
 
   const nameField = useField({ errors, tag: "input", type: "text" , inputName: "name" })
@@ -50,7 +51,7 @@ function CardEditor({ key, name, shortcut, description, expansion, timesUsed, la
           })}
         />
 
-        <label htmlFor="shortcut">
+        <label htmlFor="shortcut" className="label-contents">
           <input 
             id="shortcut"
             placeholder={ shortcut }
@@ -60,7 +61,7 @@ function CardEditor({ key, name, shortcut, description, expansion, timesUsed, la
           />
         </label>
 
-        <label htmlFor="name">
+        <label htmlFor="name" className="label-contents">
           <input 
             id="name"
             { ...nameField }
@@ -76,7 +77,7 @@ function CardEditor({ key, name, shortcut, description, expansion, timesUsed, la
           />
         </label>
 
-        <label htmlFor="description">
+        <label htmlFor="description" className="label-contents">
           <input 
             id="description"
             { ...descriptionField }
@@ -91,7 +92,7 @@ function CardEditor({ key, name, shortcut, description, expansion, timesUsed, la
           />
         </label>
 
-        <label htmlFor="expansion">
+        <label htmlFor="expansion" className="label-contents">
           <textarea
             id="expansion"
             { ...expansionField }
