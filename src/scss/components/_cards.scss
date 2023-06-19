@@ -323,8 +323,8 @@
         grid-column: 1 / 5;
 
         @media(min-width: 900px) {
-            grid-column: 3 / 4;
-            grid-row: 1 / 2;
+            grid-column: 2 / 4;
+            grid-row: 2 / 3;
         }
     }
 
@@ -411,5 +411,11 @@
             width: 90%;
             border-radius: 8px;
         }
+    }
+}
+
+.label-contents {
+    @media (max-width: 900px) {
+        display: contents;
     }
 }
