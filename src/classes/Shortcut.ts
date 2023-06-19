@@ -1,3 +1,5 @@
+import Manager from "./ShortcutsManager";
+
 export class Shortcut {
     private name: string;
     private shortcut: string;
@@ -13,13 +15,17 @@ export class Shortcut {
         shortcut = "/",
         description,
         expansion,
-        regex = /(\w+|[^\w\s]*\/\w+[^\w\s]*|[^\w\s]+|\s+)/g
+        regex = /(\w+|[^\w\s]*\/\w+[^\w\s]*|[^\w\s]+|\s+)/g,
+        timesUsed = 0,
+        lastUsedDate = undefined,
     }: {
         name: string;
         shortcut?: string;
         description: string;
         expansion: string;
-        regex?: RegExp
+        regex?: RegExp;
+        timesUsed?: number;
+        lastUsedDate?: Date;
     })  {
 
         if (!name) {
@@ -31,17 +37,17 @@ export class Shortcut {
         this.description = description;
         this.expansion = expansion;
         this.dateCreated = new Date();
-        this.lastUsedDate = undefined;
-        this.timesUsed = 0;
+        this.timesUsed = timesUsed;
+        this.lastUsedDate = lastUsedDate;
         this.regex = regex
     }
 
     expandShortcut( target: HTMLElement, command: string ): void {
 
         let shortcut = `${this.shortcut}${command}`
+        // console.log(target.current.innerText)
+        // console.log(`${this.shortcut} -> ${command}`)
 
-        console.log(`${this.shortcut} -> ${command}`)
-        
         let textInArray: RegExpMatchArray | null;
         let coincidence: boolean = false;
         
@@ -53,13 +59,12 @@ export class Shortcut {
         // textInArray = text.match(/(\w+|[^\w\s]*\w+[^\w\s]*|\s+)/gi);
         
         textInArray = text.match(this.regex);
-        
+
         if(textInArray !== null) {
             coincidence = textInArray.some(word => word.includes(shortcut));
         
         } else return
 
-        // console.log(textInArray)
 
         if(coincidence) {
             let index = textInArray.indexOf( shortcut );
@@ -69,19 +74,27 @@ export class Shortcut {
 
             this.timesUsed++;
             this.lastUsedDate = new Date;
+            Manager.saveInStorage()
             // console.log(this.lastUsedDate)
         }
     }
 
-    formatTime(date: Date): string {
+    formatTime(date: Date | string): string {
+        if (typeof date === 'string') {
+            date = new Date(date);
+        }
+
         const diff = Math.floor((Date.now() - date) / 1000); 
 
         if (diff < 60) {
-          return `${diff}s`;
+            return `${diff}s`;
         } else if (diff < 3600) {
-          return `${Math.floor(diff / 60)}m`;
+            return `${Math.floor(diff / 60)}m`;
+        } else if (diff < 86400) {
+            const hours = Math.floor(diff / 3600);
+            return `${hours}h`;
         } else {
-          return `${Math.floor(diff / 86400)}d`;
+            return `${Math.floor(diff / 86400)}d`;
         }
     }
 
@@ -96,6 +109,11 @@ export class Shortcut {
     
         this.shortcut = command;
         this.regex = RegExp[command];
+    }
+
+    resetShortcutsValues() {
+        this.lastUsedDate = undefined;
+        this.timesUsed = 0;
     }
 
     get getName(): string {
