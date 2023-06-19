@@ -2,7 +2,7 @@ import Manager from "../classes/ShortcutsManager";
 import { Shortcut } from "../classes/Shortcut";
 import notify from "../utils/notify";
 
-export function handleImportExport(cta, allShortcuts) {
+export function handleImportExport(cta, allShortcuts, setAllShortcuts) {
     if (cta === 'Import') {
         // Create an input element of type "file"
         const fileInput = document.createElement("input"); 
@@ -18,7 +18,7 @@ export function handleImportExport(cta, allShortcuts) {
         fileInput.click();
 
     } else if (cta === 'Export') {
-        console.log(allShortcuts)
+        // console.log(allShortcuts)
         // Convert the "allShortcuts" array to a JSON string with 2-space indentation
         const json = JSON.stringify(
             allShortcuts.map(shortcut => ({
@@ -74,11 +74,13 @@ const handleFileChange = (e) => {
         return new Shortcut({ ...otherData, regex: regexObj });
         });
 
-        // console.log(shortcuts)
+        console.log(shortcuts)
 
         Manager.importShortcuts(shortcuts);
+        // setAllShortcuts(Manager.getAllShortcuts)
 
-        notify("Shortcuts imported successfully")
+
+        notify("Shortcuts imported successfully", "📥")
 
     } catch (error) {
         console.error("Error al importar los shortcuts:", error);
