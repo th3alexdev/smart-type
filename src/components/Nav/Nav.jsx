@@ -4,11 +4,11 @@ import { SORT_TYPES } from "../../constants/sortTypes";
 import { ShortcutsContext } from "../../context/ShortcutsProvider";
 
 function Nav({ setSortBy }) {
-  const { setCardIsOpen } = useContext(ShortcutsContext)
+  const { setCardIsOpen } = useContext(ShortcutsContext);
 
   const sectionHandler = (e) => {
-    setCardIsOpen(false)
-    setSortBy(e.target.dataset.nav)
+    setCardIsOpen(false);
+    setSortBy(e.target.dataset.nav);
 
     const navItems = document.querySelectorAll(".nav-list__item");
     navItems.forEach(item => {
@@ -24,7 +24,7 @@ function Nav({ setSortBy }) {
     { label: "Most Used", nav: SORT_TYPES.MOST_USED, url: "/link3" },
   ];
 
-  const [selectedOption, setSelectedOption] = useState(links[0].label)
+  const [selectedOption, setSelectedOption] = useState(links[0].label);
 
   const selectOption = (link) => {
     setSelectedOption(link);

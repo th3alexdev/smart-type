@@ -5,6 +5,7 @@ import { AiOutlineSave } from "react-icons/ai"
 function SaveButton() {
   return (
     <button 
+        id="saveShortcut"
         className="btn btn-card card__save-btn" 
         type="submit">
         <AiOutlineSave style={{ color: "#fff", fontSize: "1.2rem"}}/>
