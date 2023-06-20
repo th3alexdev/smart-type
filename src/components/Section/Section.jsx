@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { Route, Routes } from "react-router-dom";
+import React, { useState, useEffect } from "react"
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import { 
   ManageSection,
@@ -15,11 +15,22 @@ function Section({ toggleDarkTheme, darkTheme }) {
   const [sortBy, setSortBy] = useState(SORT_TYPES.RECENTLY_ADDED);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  function HomeRedirect() {
+    const navigate = useNavigate();
+  
+    useEffect(() => {
+      navigate('/home');
+    }, []);
+  
+    return null;
+  }
+
   return (
     <>
       <section className="section">
         <Routes>
-          <Route path={`/home`} element={ (
+          <Route path="/" element={<HomeRedirect />} />
+          <Route path="/home" element={ (
               <ShortcutsSection
               {...
                 {
@@ -45,6 +56,7 @@ function Section({ toggleDarkTheme, darkTheme }) {
               }
               /> 
           } />
+          <Route path="*" element={<HomeRedirect />} />
         </Routes>
       </section>
     </>
