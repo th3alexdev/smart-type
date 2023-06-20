@@ -14,7 +14,7 @@ function SecButton({ cta }) {
   return (
     <button 
       className="btn btn-secondary"
-      onClick={ (e) => handleClick(cta, allShortcuts) }
+      onClick={ () => handleClick(cta, allShortcuts) }
     >
       { cta }
     </button>
