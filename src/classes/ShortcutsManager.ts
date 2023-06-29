@@ -3,9 +3,14 @@ import { convertRegexToString } from "../utils/regexConverter";
 
 class ShortcutsManager {
     shortcuts: Array<Shortcut>;
+    command: string;
+    regex: RegExp;
 
-    constructor() {
+    constructor({ command = "/", regex = /(\w+|[^\w\s]*\/\w+[^\w\s]*|[^\w\s]+|\s+)/g }: 
+    { command?: string, regex?: RegExp }) {
         this.shortcuts = [];
+        this.command = command;
+        this.regex = regex;
     }
 
     saveInStorage() {
@@ -49,6 +54,32 @@ class ShortcutsManager {
         fullShortcut.resetShortcutsValues();
     }
 
+    setCommand(command: string) {
+        this.command = command;
+    }
+
+    setRegex(command: string) {
+        const RegExp = {
+            "/": /(\w+|[^\w\s]*\/\w+[^\w\s]*|[^\w\s]+|\s+)/g,
+            "//": /(\w+|[^\w\s]*\/\w+[^\w\s]*|[^\w\s]+|\s+)/g,
+            "-": /(\w+|[^\w\s]*\-\w+[^\w\s]*|[^\w\s]+|\s+)/g,
+            "--": /(\w+|[^\w\s]*\--\w+[^\w\s]*|[^\w\s]+|\s+)/g,
+            "#": /(\w+|[^\w\s]*\#\w+[^\w\s]*|[^\w\s]+|\s+)/g
+        }
+    
+        this.regex = RegExp[command];
+    }
+
+    get getRegex(): RegExp {
+        console.log(this.regex)
+        return this.regex;
+    }
+
+    get getCommand(): string {
+        return this.command;
+    }
+
+
     importShortcuts(shortcuts: any): void {
         this.shortcuts = shortcuts;
     }
@@ -70,7 +101,7 @@ class ShortcutsManager {
     }
 }
 
-const Manager = new ShortcutsManager();
+const Manager = new ShortcutsManager({ command: "/" });
 
 
 export default Manager;
