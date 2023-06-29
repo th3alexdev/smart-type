@@ -13,9 +13,10 @@ import {
 import Manager from "../../classes/ShortcutsManager";
 import { ShortcutsContext } from '../../context/ShortcutsProvider';
 
-function Form({ title, placeholder, renderAdditionalInputs, setIsModalOpen, selectedOption }) {
-  const { setAllShortcuts } = useContext(ShortcutsContext);
+function Form({ title, placeholder, renderAdditionalInputs, setIsModalOpen }) {
+  const { setAllShortcuts, selectedCommand } = useContext(ShortcutsContext);
   const textareaRef = useRef(null);
+
 
   const { 
     register, 
@@ -62,7 +63,7 @@ function Form({ title, placeholder, renderAdditionalInputs, setIsModalOpen, sele
           <div className="form-inputs-container">
             <input 
               id="command"
-              placeholder={ selectedOption } 
+              placeholder={ selectedCommand } 
               className="form-command form__input" 
               type="text" disabled 
             />
