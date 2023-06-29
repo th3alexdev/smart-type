@@ -9,7 +9,7 @@ import {
 
 import { SORT_TYPES } from "../../constants/sortTypes"
 
-function Section({ toggleDarkTheme, darkTheme }) {
+function Section({ toggleDarkTheme, darkTheme, setCurrentSection }) {
 
   const [selectedOption, setSelectedOption] = useState("/"); // change to activeOption
   const [sortBy, setSortBy] = useState(SORT_TYPES.RECENTLY_ADDED);
@@ -20,6 +20,7 @@ function Section({ toggleDarkTheme, darkTheme }) {
   
     useEffect(() => {
       navigate('/home');
+      setCurrentSection('/home')
     }, []);
   
     return null;
