@@ -37,7 +37,6 @@ function ShortcutsSection({ sortBy, setSortBy, setIsModalOpen, isModalOpen, sele
                   title="Enter your shortcut"
                   renderAdditionalInputs={ true }
                   setIsModalOpen={ setIsModalOpen }
-                  selectedOption={ selectedOption }
                 />
               </Modal>
           )
