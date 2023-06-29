@@ -1,176 +1,49 @@
+# Smart Type ⚡ (in progress)
+SmartType is a powerful browser extension that allows users to create custom commands to automate repetitive typing tasks. With SmartType, you can save time and enhance your productivity by easily expanding predefined text snippets with just a few keystrokes.
 
-```
-smart-type
-├─ .gitignore
-├─ fonts
-│  └─ general_sans
-│     ├─ GeneralSans-Bold.otf
-│     ├─ GeneralSans-Light.otf
-│     ├─ GeneralSans-Medium.otf
-│     ├─ GeneralSans-Regular.otf
-│     └─ GeneralSans-Semibold.otf
-├─ index.html
-├─ manifest.json
-├─ package-lock.json
-├─ package.json
-├─ public
-│  ├─ browser_action
-│  │  ├─ icon128.png
-│  │  ├─ icon16.png
-│  │  ├─ icon32.png
-│  │  └─ icon48.png
-│  ├─ fonts
-│  │  ├─ fira_code
-│  │  │  └─ FiraCode-VariableFont_wght.ttf
-│  │  ├─ general_sans
-│  │  │  ├─ GeneralSans-Bold.otf
-│  │  │  ├─ GeneralSans-Light.otf
-│  │  │  ├─ GeneralSans-Medium.otf
-│  │  │  ├─ GeneralSans-Regular.otf
-│  │  │  └─ GeneralSans-Semibold.otf
-│  │  └─ open_sans
-│  │     └─ OpenSans-SemiBold.ttf
-│  ├─ icon128.png
-│  ├─ icon16.png
-│  ├─ icon32.png
-│  ├─ icon48.png
-│  └─ icons
-│     ├─ android-chrome-192x192.png
-│     ├─ android-chrome-512x512.png
-│     ├─ apple-touch-icon.png
-│     ├─ browserconfig.xml
-│     ├─ favicon-16x16.png
-│     ├─ favicon-32x32.png
-│     ├─ favicon.ico
-│     ├─ mstile-150x150.png
-│     ├─ safari-pinned-tab.svg
-│     └─ site.webmanifest
-├─ src
-│  ├─ App.jsx
-│  ├─ assets
-│  │  ├─ img
-│  │  │  └─ empty.png
-│  │  ├─ smart-type.svg
-│  │  └─ svg
-│  │     └─ blink.svg
-│  ├─ classes
-│  │  ├─ Shortcut.ts
-│  │  └─ ShortcutsManager.ts
-│  ├─ components
-│  │  ├─ BarsButton
-│  │  │  ├─ BarsButton.jsx
-│  │  │  └─ index.js
-│  │  ├─ Card
-│  │  │  ├─ Card.jsx
-│  │  │  ├─ components
-│  │  │  │  ├─ CardEditor.jsx
-│  │  │  │  ├─ CardPreview.jsx
-│  │  │  │  ├─ ExpandButton.jsx
-│  │  │  │  ├─ RemoveButton.jsx
-│  │  │  │  ├─ routes.js
-│  │  │  │  └─ SaveButton.jsx
-│  │  │  └─ index.js
-│  │  ├─ DropButton
-│  │  │  ├─ DropButton.jsx
-│  │  │  └─ index.js
-│  │  ├─ EmptyCardList
-│  │  │  ├─ EmptyCardList.jsx
-│  │  │  └─ index.js
-│  │  ├─ Form
-│  │  │  ├─ Form.jsx
-│  │  │  └─ index.js
-│  │  ├─ Header
-│  │  │  ├─ Header.jsx
-│  │  │  └─ index.js
-│  │  ├─ HeaderNav
-│  │  │  ├─ HeaderNav.jsx
-│  │  │  └─ index.js
-│  │  ├─ MainButton
-│  │  │  ├─ index.js
-│  │  │  └─ MainButton.jsx
-│  │  ├─ Modal
-│  │  │  ├─ index.js
-│  │  │  └─ Modal.jsx
-│  │  ├─ Nav
-│  │  │  ├─ index.js
-│  │  │  └─ Nav.jsx
-│  │  ├─ SecButton
-│  │  │  ├─ index.js
-│  │  │  └─ SecondaryButton.jsx
-│  │  ├─ Section
-│  │  │  ├─ components
-│  │  │  │  ├─ ManageSection.jsx
-│  │  │  │  ├─ routes.js
-│  │  │  │  ├─ ShortcutsSection.jsx
-│  │  │  │  └─ TestSection.jsx
-│  │  │  ├─ index.js
-│  │  │  └─ Section.jsx
-│  │  ├─ SortedList
-│  │  │  ├─ index.js
-│  │  │  └─ SortedList.jsx
-│  │  ├─ StatsPills
-│  │  │  ├─ index.js
-│  │  │  └─ StatsPills.jsx
-│  │  └─ SwitchButton
-│  │     ├─ index.js
-│  │     └─ SwitchButton.jsx
-│  ├─ constants
-│  │  ├─ errorMessages.js
-│  │  └─ sortTypes.js
-│  ├─ context
-│  │  └─ ShortcutsProvider.jsx
-│  ├─ extension
-│  │  ├─ background.js
-│  │  ├─ content.js
-│  │  └─ expand.js
-│  ├─ helpers
-│  │  ├─ cardHelpers.jsx
-│  │  └─ handleImportExport.js
-│  ├─ hooks
-│  │  ├─ useField.jsx
-│  │  └─ useLabel.jsx
-│  ├─ landing
-│  ├─ main.jsx
-│  ├─ routes.js
-│  ├─ scss
-│  │  ├─ base
-│  │  │  ├─ _base.scss
-│  │  │  ├─ _fonts.scss
-│  │  │  └─ _typography.scss
-│  │  ├─ components
-│  │  │  ├─ _brand.scss
-│  │  │  ├─ _btns.scss
-│  │  │  ├─ _cards.scss
-│  │  │  ├─ _dropdowns.scss
-│  │  │  ├─ _empty.scss
-│  │  │  ├─ _forms.scss
-│  │  │  ├─ _icons.scss
-│  │  │  ├─ _links.scss
-│  │  │  ├─ _modal.scss
-│  │  │  ├─ _navs.scss
-│  │  │  ├─ _pills.scss
-│  │  │  ├─ _scrollbars.scss
-│  │  │  ├─ _sections.scss
-│  │  │  ├─ _shapes.scss
-│  │  │  └─ _switch.scss
-│  │  ├─ layout
-│  │  │  ├─ _header.scss
-│  │  │  └─ _main.scss
-│  │  ├─ pages
-│  │  ├─ styles.scss
-│  │  └─ utils
-│  │     ├─ _functions.scss
-│  │     ├─ _mixins.scss
-│  │     └─ _variables.scss
-│  └─ utils
-│     ├─ dateConverter.ts
-│     ├─ formUtils
-│     │  ├─ keyHandler.ts
-│     │  ├─ routes.js
-│     │  └─ validators.ts
-│     ├─ loadShortcuts.ts
-│     ├─ notify.js
-│     └─ regexConverter.ts
-└─ vite.config.js
+> [**View Demo**](https://th3alexdev.github.io/weather-app/) <br>
+> [**View Landing Page**](https://smart-type.netlify.app/)
+<img width="100%" alt="">
 
-```
+## Features ✨
+  1. Intuitive dashboard for managing commands and their expansions, making it easy for users to create, edit, and delete commands.
+  3. Define shortcuts to trigger the expansions and save time.
+  4. Import and export functionality to easily share commands with others.
+  5. Compatible with popular browsers like Google Chrome, Opera, Safari, and more.
+  6. Fully responsive design with support for accessibility tags and night mode.
+
+## What I learned? 📚
+During the development of Text Expander, I gained valuable experience and knowledge in the following areas:
+
+   - Browser extension development using React and JavaScript.
+   - Creating reusable components and implementing routing.
+   - Utilizing object-oriented programming (OOP) in JavaScript.
+   - User interface design and creating an intuitive experience.
+   - Parsing and replacing text within input fields.
+   - Cross-browser compatibility and testing.
+
+## Dependencies 📦
+
+   - `sass` - popular CSS preprocessor that enhances the styling capabilities of CSS.
+   - `react-hook-form` -  library for building flexible and performant forms in React.
+   - `react-hot-toast` - library for displaying notifications in React.
+   - `react-icons` - a collection of popular icons for React applications.
+   - `react-router-dom` - a routing library for React applications.
+   
+
+## Future Additions 🔮
+
+In the future, the Weather App will include the following additions:
+
+ - [ ] Support for Firefox.
+
+## Contributions 🎉
+
+I accept contributions in the form of bug fixes and code improvements. If you want to contribute, simply fork the repository, make your changes, and submit a pull request. 🤘
+
+## About the Creator 👨‍💻
+
+My name is Alexander Pérez and I am the creator of this app. I am a web developer with a passion for creating fun and interactive experiences for users. If you have any questions or suggestions about the app, please don't hesitate to contact me through my social networks:
+
+  - [🐤 Twitter](https://twitter.com/th3alexdev) | [💼 LinkedIn](https://www.linkedin.com/in/th3alexdev) | [🚀 GitHub](https://github.com/th3alexdev)
+ 
