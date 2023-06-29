@@ -12,10 +12,10 @@ export class Shortcut {
 
     constructor({
         name,
-        shortcut = "/",
+        shortcut = Manager.getCommand,
         description,
         expansion,
-        regex = /(\w+|[^\w\s]*\/\w+[^\w\s]*|[^\w\s]+|\s+)/g,
+        regex = Manager.getRegex,
         timesUsed = 0,
         lastUsedDate = undefined,
     }: {
