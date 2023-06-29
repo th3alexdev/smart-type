@@ -1,4 +1,8 @@
-import React, { useState } from "react"
+import React, { useContext } from "react"
+import { ShortcutsContext } from "../../../context/ShortcutsProvider";
+import { loadDefaultCommand, setDefaultCommand } from "../../../utils/loadDefaultCommand";
+import Manager from "../../../classes/ShortcutsManager";
+
 import {
     DropButton,
     SecButton,
@@ -7,10 +11,14 @@ import {
 
 function ManageSection({ setSelectedOption, selectedOption, darkTheme, toggleDarkTheme }) {
 
-  const [selectedCommand, setSelectedCommand] = useState("/")
+  const { selectedCommand, setSelectedCommand, allShortcuts } = useContext(ShortcutsContext);
 
   const selectCommand = (command) => {
-    setSelectedCommand(command)
+    setSelectedCommand(command);
+    setDefaultCommand(command);
+    allShortcuts.map(shortcut => {
+        shortcut.setShortcut(command);
+    })
   }
 
   const options = [
