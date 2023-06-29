@@ -12,7 +12,7 @@ import { ShortcutsContext } from "./context/ShortcutsProvider";
 
 function App() {
   const location = useLocation();
-  const { setAllShortcuts } = useContext(ShortcutsContext);
+  const { allShortcuts, setAllShortcuts } = useContext(ShortcutsContext);
 
   const [currentSection, setCurrentSection] = useState(location.pathname);
   const [openNav, setOpenNav] = useState(false);
@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     const storedShortcuts = JSON.parse(localStorage.getItem("shortcuts"));
     if (storedShortcuts === null) setDefaultShortcuts(setAllShortcuts);
-    else {
+    else { 
       loadShortcuts(setAllShortcuts)
     }
 
@@ -62,6 +62,7 @@ function App() {
       </Header> 
       <main className="main">
         <Section 
+          setCurrentSection={ setCurrentSection }
           toggleDarkTheme={ handleToggleDarkTheme }
           darkTheme={ darkTheme }
         />
