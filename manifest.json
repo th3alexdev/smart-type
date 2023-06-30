@@ -26,7 +26,7 @@
             "http://*/*",
             "https://*/*"
           ],
-          "js": ["./src/extension/content.js"]
+          "js": ["./src/extension/content.js", "./src/extension/expand.js"]
         }
     ],
     "background": {
