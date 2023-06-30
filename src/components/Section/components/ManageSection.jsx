@@ -1,7 +1,6 @@
 import React, { useContext } from "react"
 import { ShortcutsContext } from "../../../context/ShortcutsProvider";
-import { loadDefaultCommand, setDefaultCommand } from "../../../utils/loadDefaultCommand";
-import Manager from "../../../classes/ShortcutsManager";
+import { setDefaultCommand } from "../../../utils/loadDefaultCommand";
 
 import {
     DropButton,
