@@ -1,5 +1,5 @@
 let currentTab;
-const dashboardURL = 'http://localhost:5173/';
+const dashboardURL = "http://localhost:5173/";
 
 // Request the current tab information from the background script
 chrome.runtime.sendMessage({ message: "current-tab" }, (response) => {
@@ -9,9 +9,7 @@ chrome.runtime.sendMessage({ message: "current-tab" }, (response) => {
     if(currentTab.url.startsWith(dashboardURL)) {
 
       // Retrieve the shortcuts data from local storage
-      const shortcutsData = localStorage.getItem('shortcuts');
-      
-
+      const shortcutsData = localStorage.getItem("shortcuts");
       if(shortcutsData) {
         // Parse the shortcuts data into an object
         let shortcuts = JSON.parse(shortcutsData);
@@ -22,12 +20,22 @@ chrome.runtime.sendMessage({ message: "current-tab" }, (response) => {
         });
       }
 
+      // Retrieve the command from local storage
+      const command = localStorage.getItem("defaultCommand");
+      if(command) {
+        // Store the command in chrome.storage
+        chrome.storage.sync.set({ command }, () => {
+          console.log("Los datos de los atajos se han almacenado en chrome.storage");
+        });
+      }
+
+
       // Add a click event listener to the document
-      document.addEventListener('click', async (e) => {
-        if (e.target.id === 'addShortcut' || e.target.id === 'saveShortcut') {
+      document.addEventListener("click", async (e) => {
+        if (e.target.id === "addShortcut" || e.target.id === "saveShortcut") {
           
           // Retrieve the updated shortcuts data from local storage
-          let shortcutsData = localStorage.getItem('shortcuts');
+          let shortcutsData = localStorage.getItem("shortcuts");
           
           if(shortcutsData) {
             // Parse the updated shortcuts data into an object
