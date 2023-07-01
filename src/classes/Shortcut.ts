@@ -6,7 +6,7 @@ export class Shortcut {
     private description: string;
     private expansion: string;
     private dateCreated: Date;
-    private lastUsedDate: undefined | Date;
+    private lastUsedDate: Date | number;
     private timesUsed: number;
     private regex: RegExp
 
@@ -17,7 +17,7 @@ export class Shortcut {
         expansion,
         regex = Manager.getRegex,
         timesUsed = 0,
-        lastUsedDate = undefined,
+        lastUsedDate = 0,
     }: {
         name: string;
         shortcut?: string;
@@ -25,7 +25,7 @@ export class Shortcut {
         expansion: string;
         regex?: RegExp;
         timesUsed?: number;
-        lastUsedDate?: Date;
+        lastUsedDate?: number | Date;
     })  {
 
         if (!name) {
