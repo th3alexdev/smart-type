@@ -36,6 +36,10 @@ class ShortcutsManager {
         });
     }
 
+    removeAllShortcuts():void {
+        this.shortcuts = [];
+    }
+
     editShortcut({ 
         fullShortcut,
         name,
@@ -71,7 +75,7 @@ class ShortcutsManager {
     }
 
     get getRegex(): RegExp {
-        console.log(this.regex)
+        // console.log(this.regex)
         return this.regex;
     }
 
