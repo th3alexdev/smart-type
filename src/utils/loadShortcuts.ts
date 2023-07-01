@@ -3,7 +3,7 @@ import { Shortcut } from "./../classes/Shortcut";
 import {convertStringToRegex } from "./regexConverter";
 
 // Sets the default shortcuts and saves them in local storage
-export const setDefaultShortcuts = (setAllShorcuts: Function): void => { 
+export const setDefaultShortcuts = (setAllShortcuts: Function): void => { 
 
     // Converts a regular expression object to its string representation
     const regexToString = (key: string, value: any) => {
@@ -34,11 +34,11 @@ export const setDefaultShortcuts = (setAllShorcuts: Function): void => {
     localStorage.setItem('shortcuts', shortcutsJSON);
 
     // Calling setAllShortcuts function with the updated shortcuts list
-    setAllShorcuts(Manager.getAllShortcuts)
+    setAllShortcuts(Manager.getAllShortcuts)
 }
 
 // Loads shortcuts from local storage
-export function loadShortcuts(setAllShorcuts: Function): void {
+export function loadShortcuts(setAllShortcuts: Function): void {
   const storedShortcuts = localStorage.getItem("shortcuts");
 
   if (storedShortcuts) {
@@ -60,7 +60,7 @@ export function loadShortcuts(setAllShorcuts: Function): void {
         });
         
         // Calling setAllShortcuts function with the updated shortcuts list
-        setAllShorcuts(Manager.getAllShortcuts)
+        setAllShortcuts(Manager.getAllShortcuts)
 
       } else {
         console.error("The stored value is not a valid object or array of shortcuts.");
@@ -70,4 +70,10 @@ export function loadShortcuts(setAllShorcuts: Function): void {
       console.error("Failed to load shortcuts from local storage: ", error);
     }
   }
+}
+
+export function deleteShortcuts(setAllShortcuts: Function): void {
+    localStorage.removeItem("shortcuts");
+    Manager.removeAllShortcuts();
+    setAllShortcuts(Manager.getAllShortcuts);
 }
