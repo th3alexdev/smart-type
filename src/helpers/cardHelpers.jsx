@@ -43,7 +43,7 @@ export const createCardElement = ({
         name={ el.getName }
         shortcut={ el.getShortcut }
         description={ el.getDescription }
-        lastUsedDate={ el.lastUsedDate !== undefined ? el.formatTime(el.lastUsedDate) : null }
+        lastUsedDate={ el.lastUsedDate !== 0 ? el.formatTime(el.lastUsedDate) : null }
         expansion={ el.getExpansion }
         timesUsed={ el.timesUsed }
         key={ key }
