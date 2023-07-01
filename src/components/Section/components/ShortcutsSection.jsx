@@ -47,6 +47,11 @@ function ShortcutsSection({ sortBy, setSortBy, setIsModalOpen, isModalOpen, sele
         <SortedList 
           sortBy={ sortBy }
         ></SortedList>
+        <div className="cards-container__footer">
+          <div>
+            <p>This extension is currently in an experimental phase. To see some changes or use newly created shortcuts on other pages, please refresh the dashboard. Thanks.</p>
+          </div> 
+        </div>
       </> 
   )
 }
