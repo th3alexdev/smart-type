@@ -45,7 +45,7 @@ export class Shortcut {
     expandShortcut( target: HTMLElement, command: string ): void {
 
         let shortcut = `${this.shortcut}${command}`
-        // console.log(target.current.innerText)
+        // console.log(`${target.innerText}`)
         // console.log(`${this.shortcut} -> ${command}`)
 
         let textInArray: RegExpMatchArray | null;
@@ -55,14 +55,15 @@ export class Shortcut {
         const expansion = this.expansion;
 
         if(!(target && text)) return
-        
-        // textInArray = text.match(/(\w+|[^\w\s]*\w+[^\w\s]*|\s+)/gi);
-        
-        textInArray = text.match(this.regex);
 
+        // textInArray = text.match(/(\w+|[^\w\s]*\--\w+[^\w\s]*|[^\w\s]+|\s+)/g);
+        textInArray = text.match(Manager.getRegex);
+
+        // console.log(textInArray)
         if(textInArray !== null) {
             coincidence = textInArray.some(word => word.includes(shortcut));
         
+            // console.log(coincidence)
         } else return
 
 
