@@ -32,7 +32,7 @@ function Form({ title, placeholder, renderAdditionalInputs, setIsModalOpen }) {
     setAllShortcuts(Manager.getAllShortcuts)
     onSubmitAdd({ data, setError, clearErrors, setIsModalOpen });
     Manager.saveInStorage();
-    console.log(Manager.getAllShortcuts)
+    // console.log(Manager.getAllShortcuts)
   };
 
   const handleInputChange = () => {
