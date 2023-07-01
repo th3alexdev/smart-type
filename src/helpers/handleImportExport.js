@@ -1,6 +1,9 @@
 import Manager from "../classes/ShortcutsManager";
 import { Shortcut } from "../classes/Shortcut";
 import notify from "../utils/notify";
+import { setDefaultCommand } from "../utils/loadDefaultCommand";
+import { deleteShortcuts } from "../utils/loadShortcuts";
+import { convertStringToRegex, convertRegexToString } from "../utils/regexConverter";
 
 export function handleImportExport(cta, allShortcuts, setAllShortcuts) {
     if (cta === 'Import') {
@@ -12,7 +15,7 @@ export function handleImportExport(cta, allShortcuts, setAllShortcuts) {
         fileInput.accept = ".json";
 
         // Add an event listener to handle the file change event
-        fileInput.addEventListener("change", handleFileChange);
+        fileInput.addEventListener("change", handleFileChange(setAllShortcuts));
 
         // Simulate a click on the file input element to open the file selection dialog
         fileInput.click();
@@ -21,10 +24,11 @@ export function handleImportExport(cta, allShortcuts, setAllShortcuts) {
         // console.log(allShortcuts)
         // Convert the "allShortcuts" array to a JSON string with 2-space indentation
         const json = JSON.stringify(
-            allShortcuts.map(shortcut => ({
-            ...shortcut,
-            regex: shortcut.regex.toString()  // Convert the regex to a string
-            })),
+            allShortcuts.map((shortcut) => {
+                const shortcutData = { ...shortcut };
+                convertRegexToString(shortcutData);
+                return shortcutData;
+            }),
             null,
             2
         );
@@ -48,7 +52,7 @@ export function handleImportExport(cta, allShortcuts, setAllShortcuts) {
     }
 }
 
-const handleFileChange = (e) => {
+const handleFileChange = (setAllShortcuts) => (e) => {
     // Get the selected file by the user
     const file = e.target.files[0];
 
@@ -65,22 +69,26 @@ const handleFileChange = (e) => {
 
         // Convert the imported shortcuts into instances of the Shortcut class
         const shortcuts = shortcutsData.map((shortcutData) => {
-        const { regex, ...otherData } = shortcutData;
+            const { regex, ...otherData } = shortcutData;
 
-        // Convert the regex string into a RegExp object, if it exists
-        const regexObj = regex ? new RegExp(regex) : undefined;
+            const regexObj = convertStringToRegex(regex);
 
-        // Create a new instance of the Shortcut class
-        return new Shortcut({ ...otherData, regex: regexObj });
+
+            return new Shortcut({ ...otherData, regex: regexObj });
         });
 
-        console.log(shortcuts)
+    deleteShortcuts(setAllShortcuts);
+    Manager.setRegex(shortcuts[0].shortcut);
+    Manager.getRegex
+    setDefaultCommand(shortcuts[0].shortcut);
+    Manager.importShortcuts(shortcuts);
+    Manager.saveInStorage();
+    
+    setAllShortcuts(Manager.getAllShortcuts);
+    console.log(Manager.getAllShortcuts)
 
-        Manager.importShortcuts(shortcuts);
-        // setAllShortcuts(Manager.getAllShortcuts)
+    notify("Shortcuts imported successfully", "📥")
 
-
-        notify("Shortcuts imported successfully", "📥")
 
     } catch (error) {
         console.error("Error al importar los shortcuts:", error);
