@@ -7,6 +7,20 @@
     flex-direction: column;
     gap: 15px;
     padding-top: 15px;
+    margin-bottom: 35px;
+    
+    &__footer {
+        display: grid;
+        place-items: center;
+
+        div {
+            width: 75%;
+            max-width: 650px;
+            text-align: center;
+            font-weight: 400;
+            opacity: 0.5;
+        }
+    }
 }
 
 .card {
