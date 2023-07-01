@@ -1,14 +1,18 @@
-function expandShortcut({target, commandName, commandRegex, value, name, commandExpansion}) {
-    let shortcut = `${commandName}${name}`;
-    // console.log(shortcut)
+function expandShortcut({target, value, shrtSymbol, fullCommand}) {
+    const shrtName = fullCommand.name;
+    const shrtExpansion = fullCommand.expansion;
+    const shrtRegex = fullCommand.regex;
+
+    // Construct the shortcut string with the provided symbol and name
+    let shortcut = `${shrtSymbol}${shrtName}`;
 
     let textInArray;
     let coincidence = false;
   
     let text = value;
-    const expansion = commandExpansion;
   
-    const regex = convertStringToRegex(commandRegex);
+    // Convert the shortcut regex string to a RegExp object
+    const regex = convertStringToRegex(shrtRegex);
     textInArray = text.match(regex);
   
     if (textInArray !== null) {
@@ -19,8 +23,20 @@ function expandShortcut({target, commandName, commandRegex, value, name, command
     if (coincidence) {
       // Replace the shortcut with the expansion in the input text
       let index = textInArray.indexOf(shortcut);
-      textInArray[index] = expansion;
+      textInArray[index] = shrtExpansion;
       target.target.value = textInArray.join(" ");
+
+      // Increment the timesUsed count and set lastUsedDate to current date
+      fullCommand.timesUsed++;
+      fullCommand.lastUsedDate = new Date;
+      fullCommand.lastUsedDate = fullCommand.lastUsedDate.toISOString();
+
+      const modifiedShortcuts = fullCommand;
+      
+      // Save the modified shortcuts to chrome.storage.sync
+      chrome.storage.sync.set({ modifiedShortcuts })
+
+      // console.log(fullCommand)
     }
 }
 
@@ -33,11 +49,9 @@ function handleInputEvent(shortcuts, command) {
         // Call expandShortcut function for each shortcut
         expandShortcut({ 
           target: e, 
-          commandName: command,
-          commandRegex: shrt.regex,
           value: e.target.value, 
-          name: shrt.name,
-          commandExpansion: shrt.expansion
+          shrtSymbol: command,
+          fullCommand: shrt
         })
       })
   })
@@ -57,10 +71,10 @@ chrome.runtime.sendMessage({ message: "current-tab" }, (response) => {
 
             // Check if shortcuts were found in chrome.storage
             if (shortcuts) {
-              console.log("Shortcuts encontrados en chrome.storage.sync:");
+              // console.log("Shortcuts encontrados en chrome.storage.sync:");
               handleInputEvent(shortcuts, command);
             } else {
-              console.log("No se encontraron atajos en chrome.storage.sync.");
+              // console.log("No se encontraron atajos en chrome.storage.sync.");
             }
         });
     }
@@ -88,3 +102,4 @@ function convertStringToRegex(regex) {
     }
   }
 }
+
