@@ -24,7 +24,8 @@ export const onSubmitAdd = ({
   
   let allShortcuts: Array<Shortcut>,
     alreadyExist: boolean,
-    coincidence: Shortcut | undefined;
+    coincidence: Shortcut | undefined,
+    expansion: String;
 
   allShortcuts = Manager.getAllShortcuts;
   alreadyExist = allShortcuts.some(
@@ -40,7 +41,9 @@ export const onSubmitAdd = ({
     return;
   }
 
-  
+  expansion = convertTextEntities(data.expansion);
+  data.expansion = expansion;
+
   if (isEditing) {
 
     const newShortcutName = data.originalName;
@@ -172,4 +175,14 @@ export function getErrorMessages(errorType: string, fieldType: string): string |
   };
 
   return fieldErrors[fieldType]?.[errorType];
+}
+
+export function convertTextEntities(text) {
+  // Replace "<br>" with "\n"
+  const textWithLineBreaks = text.replace(/<br>/g, "\n");
+
+  // Replace "&nbsp;" with " "
+  const textWithSpaces = textWithLineBreaks.replace(/&nbsp;/g, " ");
+
+  return textWithSpaces;
 }
