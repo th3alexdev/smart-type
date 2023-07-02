@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react"
-import "./scss/styles.scss"
+import "./css/styles.min.css"
 import {
         Header,
         HeaderNav,
