@@ -1,4 +1,4 @@
-function expandShortcut({target, value, shrtSymbol, fullCommand}) {
+function expandShortcut({target, value, shrtSymbol, fullCommand, isInput}) {
     const shrtName = fullCommand.name;
     const shrtExpansion = fullCommand.expansion;
     const shrtRegex = fullCommand.regex;
@@ -13,18 +13,23 @@ function expandShortcut({target, value, shrtSymbol, fullCommand}) {
   
     // Convert the shortcut regex string to a RegExp object
     const regex = convertStringToRegex(shrtRegex);
-    textInArray = text.match(regex);
+    if (text !== undefined) {
+      textInArray = text.match(regex);
   
-    if (textInArray !== null) {
-      // Check if the shortcut exists in the input text
-      coincidence = textInArray.some((word) => word.includes(shortcut));
-    } else return;
-  
+      if (textInArray !== null) {
+        // Check if the shortcut exists in the input text
+        coincidence = textInArray.some((word) => word.includes(shortcut));
+      }
+    }
+
     if (coincidence) {
       // Replace the shortcut with the expansion in the input text
       let index = textInArray.indexOf(shortcut);
       textInArray[index] = shrtExpansion;
-      target.target.value = textInArray.join(" ");
+
+
+      if(isInput) target.target.value = textInArray.join(" ");
+      else target.target.innerHTML = textInArray.join(" ");
 
       // Increment the timesUsed count and set lastUsedDate to current date
       fullCommand.timesUsed++;
@@ -42,19 +47,29 @@ function expandShortcut({target, value, shrtSymbol, fullCommand}) {
 
 
 function handleInputEvent(shortcuts, command) {
+  // Define a function to expand the shortcut
+  function expandShortcutForElement(target, value, isInput) {
+    shortcuts.forEach((shrt) => {
+      expandShortcut({
+        target: { target }, // Wrap the target in an object to match the previous function signature
+        shrtSymbol: command,
+        fullCommand: shrt,
+        value,
+        isInput
+      });
+    });
+  }
+
   // Add an input event listener to the document
   document.addEventListener('input', (e) => {
-      shortcuts.forEach(shrt => {
-
-        // Call expandShortcut function for each shortcut
-        expandShortcut({ 
-          target: e, 
-          value: e.target.value, 
-          shrtSymbol: command,
-          fullCommand: shrt
-        })
-      })
+    expandShortcutForElement(e.target, e.target.value, true);
   })
+
+  document.querySelectorAll('[contenteditable="true"]').forEach((element) => {
+    element.addEventListener('input', (e) => {
+      expandShortcutForElement(e.target, e.target.innerHTML, false);
+    });
+  });
 }
 
 // Send message to background.js to get the current tab
