@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "sass": "sass src/scss/styles.scss src/css/styles.css --no-source-map",
-    "build-sass": "npm run sass && npm run build"
+    "postcss": "postcss src/css/styles.css -o src/css/styles.min.css --no-map",
+    "build-sass": "npm run sass && npm run postcss && npm run build"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -22,6 +23,10 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
+    "autoprefixer": "^10.4.14",
+    "cssnano": "^6.0.1",
+    "postcss": "^8.4.24",
+    "postcss-cli": "^10.1.0",
     "sass": "^1.62.1",
     "vite": "^4.1.0"
   }
