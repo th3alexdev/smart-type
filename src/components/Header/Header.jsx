@@ -12,8 +12,9 @@ function Header({ children, openNav, setOpenNav }) {
         <h1 className="brand">
           <a 
             target="_blank"
-            href="#"
+            href="https://smart-type.netlify.app/"
             className="link"
+            aria-label="SmartType - Visit homepage"
             >
             SmartType
           </a>
@@ -21,7 +22,10 @@ function Header({ children, openNav, setOpenNav }) {
 
         { children }
 
-        <BarsButton openNavHandler={ toggleNav } />
+        <BarsButton 
+          openNavHandler={ toggleNav } 
+          aria-label="Toggle menu"
+        />
       </div>
     </header>
   )
