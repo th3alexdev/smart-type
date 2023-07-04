@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { 
   ManageSection,
@@ -11,55 +11,68 @@ import { SORT_TYPES } from "../../constants/sortTypes"
 
 function Section({ toggleDarkTheme, darkTheme, setCurrentSection }) {
 
-  const [selectedOption, setSelectedOption] = useState("/"); // change to activeOption
-  const [sortBy, setSortBy] = useState(SORT_TYPES.RECENTLY_ADDED);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("/"); // Active option in the navigation
+  const [sortBy, setSortBy] = useState(SORT_TYPES.RECENTLY_ADDED); // Sort type state
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const hash = location.hash;
 
-  function HomeRedirect() {
-    const navigate = useNavigate();
-  
-    useEffect(() => {
-      navigate('/home');
-      setCurrentSection('/home')
-    }, []);
-  
-    return null;
+  // useEffect to handle route changes and update current section state
+  useEffect(() => {
+    console.log(hash)
+    // Update the current section based on the hash in the URL
+    if(hash === "#home") {
+     setCurrentSection('/index.html/home')
+
+   } else if (hash === '#test') {
+     setCurrentSection('/index.html/test')
+
+   } else if (hash === '#manage') {
+     setCurrentSection('/index.html/manage')
+
+   } 
+  //  else if (hash !== "/index.html#home#") {
+  //    // If the hash doesn't match any valid section, navigate to the home section
+  //    navigate('/index.html#home');
+  //  }
+
+  }, [location, setCurrentSection, hash]);
+
+  let sectionComponent = null;
+
+  if (hash === "#home") {
+    // Render the ShortcutsSection component for the home section
+    sectionComponent = (
+      <ShortcutsSection
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        setIsModalOpen={setIsModalOpen}
+        isModalOpen={isModalOpen}
+        selectedOption={selectedOption}
+      />
+    );
+  } else if (hash === "#test") {
+    // Render the TestSection component for the test section
+    sectionComponent = (
+      <TestSection />
+    );
+  } else if (hash === "#manage") {
+    // Render the ManageSection component for the manage section
+    sectionComponent = (
+      <ManageSection
+        setSelectedOption={setSelectedOption}
+        selectedOption={selectedOption}
+        darkTheme={darkTheme}
+        toggleDarkTheme={toggleDarkTheme}
+      />
+    );
   }
 
   return (
     <>
-      <section className="section">
-        <Routes>
-          <Route path="/" element={<HomeRedirect />} />
-          <Route path="/home" element={ (
-              <ShortcutsSection
-              {...
-                {
-                  sortBy,
-                  setSortBy,
-                  setIsModalOpen,
-                  isModalOpen,
-                  selectedOption
-                }
-              }
-            />  
-          ) } />
-          <Route path="/test" element={ <TestSection /> } />
-          <Route path="/manage" element={ 
-              <ManageSection
-              {...
-                {
-                  setSelectedOption,
-                  selectedOption,
-                  darkTheme,
-                  toggleDarkTheme,
-                }
-              }
-              /> 
-          } />
-          <Route path="*" element={<HomeRedirect />} />
-        </Routes>
-      </section>
+      <section className="section"> { sectionComponent } </section> 
     </>
   )
 }
