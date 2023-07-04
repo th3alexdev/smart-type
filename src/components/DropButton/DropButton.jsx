@@ -10,7 +10,7 @@ function DropButton({ selectedOption, children, className }) {
   return (
     <>
       <label className={`dd ${className && className}`} htmlFor="test" ref={ dropdownRef }>
-        <p className="dd__placeholder"> 
+        <p className="dd__placeholder" aria-label="Dropdown Menu"> 
           { selectedOption }
           <span 
             className={ 
