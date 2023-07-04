@@ -1,0 +1,35 @@
+{
+    "manifest_version": 3,
+    "name": "SmartType - Automatic Text Expander",
+    "version": "1.0",
+    "author": "dev.alexanderperez@protonmail.com",  
+    "description": "With this tool, you will have the power to automate your workflows, save time and enhance your productivity by eliminating repetitive typing tasks.",
+    "icons": {
+        "32": "./browser_action/icon32.png",
+        "48": "./browser_action/icon48.png",
+        "128": "./browser_action/icon128.png"
+    },
+    "action": {
+        "default_title":"SmartType | Automatic Text Expander",
+        "default_icon": "./browser_action/icon48.png"
+    },
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "storage",
+        "scripting",
+        "background"
+    ],
+    "content_scripts": [
+        {
+          "matches": [
+            "http://*/*",
+            "https://*/*"
+          ],
+          "js": ["./extension/content.js", "./extension/expand.js"]
+        }
+    ],
+    "background": {
+        "service_worker": "./extension/background.js"
+    }
+}
