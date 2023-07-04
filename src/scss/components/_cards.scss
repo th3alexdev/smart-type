@@ -18,6 +18,7 @@
             max-width: 650px;
             text-align: center;
             font-weight: 400;
+            font-size: 1rem;
             opacity: 0.5;
             color: var(--color-text-color);
         }
@@ -63,6 +64,7 @@
         font-family: f.getFont("monospace-font");
         letter-spacing: -1px;
         align-self: flex-end;
+        font-size: 1.17rem;
 
         grid-row: 2 / 3;
 
@@ -94,6 +96,7 @@
         transition: opacity .3s;
         
         grid-row: 3 / 4;
+        font-size: 1rem;
 
         @media (min-width: 585px) {
             grid-row: 2 / 3;

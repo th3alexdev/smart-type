@@ -19,6 +19,7 @@
     background-color: f.getColor('dropdown-btn-bg');
     white-space: nowrap;
     transition: background .3s;
+    font-size: 1rem;
 
     &:hover {
         background-color: f.getColor('dropdown-btn-hover-bg');
