@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 import { setDefaultShortcuts, loadShortcuts } from "./utils/loadShortcuts";
 import { ShortcutsContext } from "./context/ShortcutsProvider";
+import Manager from "./classes/ShortcutsManager";
 
 function App() {
   const location = useLocation();
@@ -19,11 +20,40 @@ function App() {
   const [darkTheme, setDarkTheme] = useState(false);
 
   useEffect(() => {
-    const storedShortcuts = JSON.parse(localStorage.getItem("shortcuts"));
-    if (storedShortcuts === null) setDefaultShortcuts(setAllShortcuts);
-    else { 
+    const originalShortcuts = JSON.parse(localStorage.getItem('shortcuts'));
+    if (originalShortcuts === null) { 
+      setDefaultShortcuts(setAllShortcuts) 
+      chrome.storage.sync.remove("shortcuts")
+    } else { 
       loadShortcuts(setAllShortcuts)
     }
+
+    // Obtener los shortcuts modificados de chrome.storage.sync
+    chrome.storage.sync.get("shortcuts", function(result) {
+      let storedShortcuts = result.shortcuts;
+
+      if (storedShortcuts) {
+        if (!Array.isArray(storedShortcuts)) {
+          storedShortcuts = [storedShortcuts];
+        }
+
+        const storedShortcutsString = JSON.stringify(storedShortcuts);
+        const originalShortcutsString = JSON.stringify(originalShortcuts);
+
+        if (storedShortcutsString !== originalShortcutsString) {
+          localStorage.removeItem("shortcuts");
+          localStorage.setItem("shortcuts", storedShortcutsString);
+          chrome.storage.sync.remove("shortcuts");
+          // loadShortcuts(setAllShortcuts);
+        }
+
+    } else {
+
+      const shortcuts = Manager.getAllShortcuts;
+      chrome.runtime.sendMessage({ action: 'sendVariable', data: shortcuts });
+      chrome.storage.sync.set({ shortcuts });
+    }
+  });
 
     const darkModeEnabled = JSON.parse(localStorage.getItem("darkModeEnabled"));
     if (darkModeEnabled === null) setDarkTheme(false)
