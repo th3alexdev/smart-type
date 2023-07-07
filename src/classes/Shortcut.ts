@@ -5,7 +5,7 @@ export class Shortcut {
     private shortcut: string;
     private description: string;
     private expansion: string;
-    private dateCreated: Date;
+    private dateCreated: Date | string; 
     private lastUsedDate: Date | number;
     private timesUsed: number;
     private regex: RegExp
@@ -37,6 +37,7 @@ export class Shortcut {
         this.description = description;
         this.expansion = expansion;
         this.dateCreated = new Date();
+        this.dateCreated = this.dateCreated.toISOString();
         this.timesUsed = timesUsed;
         this.lastUsedDate = lastUsedDate;
         this.regex = regex
