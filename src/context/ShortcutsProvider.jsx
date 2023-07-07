@@ -9,9 +9,18 @@ export const ShortcutsProvider = ({ children }) => {
   const [selectedCommand, setSelectedCommand] = useState(null);
 
   useEffect(() => {
+    const getAllShortcuts = Manager.getAllShortcuts;
+    console.log(getAllShortcuts);
+
+    chrome.runtime.sendMessage({ action: 'sendVariable', data: getAllShortcuts });
+  }, [Manager.getAllShortcuts]);
+
+  useEffect(() => {
     Manager.saveInStorage();
     Manager.setCommand(selectedCommand)
     Manager.setRegex(selectedCommand)
+
+    chrome.runtime.sendMessage({ action: 'selectedCommand', data: selectedCommand })
   }, [selectedCommand]);
 
   useEffect(() => {
@@ -19,10 +28,20 @@ export const ShortcutsProvider = ({ children }) => {
     if (defaultCommand === null) {
         setDefaultCommand("/");
         setSelectedCommand("/")
+
+        const command =  defaultCommand;
+        chrome.storage.sync.set({ command }, () => {
+          chrome.runtime.sendMessage({ action: 'sendCommand', command: command });
+        });
     }
     else {
         loadDefaultCommand();
         setSelectedCommand(defaultCommand);
+        
+        const command =  defaultCommand;
+        chrome.storage.sync.set({ command }, () => {
+          chrome.runtime.sendMessage({ action: 'sendCommand', command: command });
+        });
     };
 
     const shortcuts = Manager.getAllShortcuts;
