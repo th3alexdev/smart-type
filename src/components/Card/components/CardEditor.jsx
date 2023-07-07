@@ -30,6 +30,14 @@ function CardEditor({ key, name, shortcut, description, expansion, timesUsed, la
     onSubmitEdit({ data, setError, clearErrors, closeCard });
     setAllShortcuts(Manager.getAllShortcuts);
     Manager.saveInStorage();
+
+    const shortcuts = Manager.getAllShortcuts;
+
+    chrome.runtime.sendMessage({ action: 'sendVariable', data: shortcuts });
+
+    chrome.storage.sync.set({ shortcuts }, () => {
+      // console.log("Los datos de los atajos se han almacenado en chrome.storage");
+    });
   };
 
   const nameField = useField({ errors, tag: "input", type: "text" , inputName: "name" })
