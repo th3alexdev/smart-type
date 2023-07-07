@@ -1,7 +1,7 @@
-function expandShortcut({target, value, shrtSymbol, fullCommand, isInput}) {
+function expandShortcut({target, value, shrtSymbol, fullCommand, isInput, allShortcuts}) {
     const shrtName = fullCommand.name;
     const shrtExpansion = fullCommand.expansion;
-    const shrtRegex = fullCommand.regex;
+    const shrtRegex = setRegex(shrtSymbol);
 
     // Construct the shortcut string with the provided symbol and name
     let shortcut = `${shrtSymbol}${shrtName}`;
@@ -11,17 +11,22 @@ function expandShortcut({target, value, shrtSymbol, fullCommand, isInput}) {
   
     let text = value;
   
-    // Convert the shortcut regex string to a RegExp object
-    const regex = convertStringToRegex(shrtRegex);
+    // console.log(`name -> ${shrtName}`)
+    // console.log(`expansion -> ${shrtExpansion}`)
+    // console.log(`regex -> ${shrtRegex}`)
+    // console.log(`shortcut -> ${shortcut}`)
+    
     if (text !== undefined) {
-      textInArray = text.match(regex);
-  
+      textInArray = text.match(shrtRegex);
+      // console.log(textInArray)
+      
       if (textInArray !== null) {
         // Check if the shortcut exists in the input text
         coincidence = textInArray.some((word) => word.includes(shortcut));
       }
     }
 
+    // console.log(`isIn? -> ${coincidence}`)
     if (coincidence) {
       // Replace the shortcut with the expansion in the input text
       let index = textInArray.indexOf(shortcut);
@@ -35,11 +40,14 @@ function expandShortcut({target, value, shrtSymbol, fullCommand, isInput}) {
       fullCommand.timesUsed++;
       fullCommand.lastUsedDate = new Date;
       fullCommand.lastUsedDate = fullCommand.lastUsedDate.toISOString();
+      fullCommand.regex = shrtRegex.toString();
 
-      const modifiedShortcuts = fullCommand;
+      const shortcuts = allShortcuts;
+
+      // console.log(allShortcuts)
       
       // Save the modified shortcuts to chrome.storage.sync
-      chrome.storage.sync.set({ modifiedShortcuts })
+      chrome.storage.sync.set({ shortcuts })
 
       // console.log(fullCommand)
     }
@@ -55,7 +63,8 @@ function handleInputEvent(shortcuts, command) {
         shrtSymbol: command,
         fullCommand: shrt,
         value,
-        isInput
+        isInput,
+        allShortcuts: shortcuts
       });
     });
   }
@@ -72,49 +81,42 @@ function handleInputEvent(shortcuts, command) {
   });
 }
 
-// Send message to background.js to get the current tab
-chrome.runtime.sendMessage({ message: "current-tab" }, (response) => {
-    currentTab = response.tab;
+// Envía un mensaje al script de fondo solicitando los datos de los atajos
+chrome.runtime.sendMessage({ action: 'getShortcuts' }, function(response) {
+  // Maneja la respuesta del script de fondo con los datos de los atajos
+  let shortcuts = response.shortcuts;
+  const command = response.command;
 
-    if(!currentTab.url.startsWith(dashboardURL)) {
-        // Retrieve shortcuts from chrome.storage
-        chrome.storage.sync.get(["shortcuts","command"], (result) => {
-            const shortcuts = result.shortcuts;
-            const command = result.command;
-
-            allShortcuts = shortcuts;
-
-            // Check if shortcuts were found in chrome.storage
-            if (shortcuts) {
-              // console.log("Shortcuts encontrados en chrome.storage.sync:");
-              handleInputEvent(shortcuts, command);
-            } else {
-              // console.log("No se encontraron atajos en chrome.storage.sync.");
-            }
-        });
+  if (shortcuts && command){
+    if(!Array.isArray(shortcuts)) {
+      shortcuts = [shortcuts];
     }
-})
 
+    if (shortcuts.length > 0) {
+      handleInputEvent(shortcuts, command);
 
-function convertStringToRegex(regex) {
-  if (typeof regex === "string") {
-    try {
-      const regexString = regex;
-
-      // Extracts the flags from the regex string using a regular expression
-      const regexFlags = regexString.replace(/.*\/([gimy]*)$/, '$1');
-
-      // Extracts the pattern from the regex string using a regular expression
-      const regexPattern = regexString.replace(new RegExp(`^/(.*?)/${regexFlags}$`), '$1');
-
-      // Creates a new RegExp object with the extracted pattern and flags
-      regex = new RegExp(regexPattern, regexFlags);
-      
-      return regex;
-      
-    } catch (error) {
-      console.error("Error converting string from regex to RegExp:", error);
+      console.log("Shortcuts:");
+      shortcuts.forEach((shortcut) => {
+        console.log(` ${command}${shortcut.name}`);
+      });
     }
+  } else {
+    console.error("No shortcuts found. Please add shortcuts or refresh the dashboard tab.");
   }
-}
+});
 
+function setRegex(command) {
+  let regex;
+  
+  const RegExp = {
+      "/": /(\w+|[^\w\s]*\/\w+[^\w\s]*|[^\w\s]+|\s+)/g,
+      "//": /(\w+|[^\w\s]*\/\w+[^\w\s]*|[^\w\s]+|\s+)/g,
+      "-": /(\w+|[^\w\s]*\-\w+[^\w\s]*|[^\w\s]+|\s+)/g,
+      "--": /(\w+|[^\w\s]*\--\w+[^\w\s]*|[^\w\s]+|\s+)/g,
+      "#": /(\w+|[^\w\s]*\#\w+[^\w\s]*|[^\w\s]+|\s+)/g
+  }
+
+  regex = RegExp[command];
+
+  return regex;
+}
