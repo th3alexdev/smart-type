@@ -21,28 +21,26 @@ function Section({ toggleDarkTheme, darkTheme, setCurrentSection }) {
 
   // useEffect to handle route changes and update current section state
   useEffect(() => {
-    console.log(hash)
     // Update the current section based on the hash in the URL
-    if(hash === "#home") {
+    if(hash === "#home" || hash.startsWith("#home#")) {
+      // console.log("uwu")
      setCurrentSection('/index.html/home')
-
-   } else if (hash === '#test') {
+     
+    } else if (hash === '#test') {
      setCurrentSection('/index.html/test')
 
    } else if (hash === '#manage') {
      setCurrentSection('/index.html/manage')
 
-   } 
-  //  else if (hash !== "/index.html#home#") {
-  //    // If the hash doesn't match any valid section, navigate to the home section
-  //    navigate('/index.html#home');
-  //  }
-
-  }, [location, setCurrentSection, hash]);
+   } else if (hash !== "/index.html#home#") {
+     // If the hash doesn't match any valid section, navigate to the home section
+     navigate('/index.html#home');
+   }
+}, [location, setCurrentSection, hash]);
 
   let sectionComponent = null;
 
-  if (hash === "#home") {
+  if (hash === "#home" || hash.startsWith("#home#")) {
     // Render the ShortcutsSection component for the home section
     sectionComponent = (
       <ShortcutsSection
