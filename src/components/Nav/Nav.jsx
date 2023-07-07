@@ -59,7 +59,7 @@ function Nav({ setSortBy }) {
         <ul className="nav-list nav-list-secondary">
           <li className="nav-list__item nav-list__item--short">
             <a 
-              href="#" 
+              href={`/index.html#home#${SORT_TYPES.RECENTLY_ADDED}`} 
               className="link nav-active"
               data-nav={ SORT_TYPES.RECENTLY_ADDED }
               onClick={((e) => sectionHandler(e))}
@@ -67,7 +67,7 @@ function Nav({ setSortBy }) {
           </li>
           <li className="nav-list__item nav-list__item--short">
             <a 
-              href="#" 
+              href={`/index.html#home#${SORT_TYPES.RECENTLY_USED}`} 
               className="link"
               data-nav={ SORT_TYPES.RECENTLY_USED }
               onClick={((e) => sectionHandler(e))}
@@ -75,7 +75,7 @@ function Nav({ setSortBy }) {
           </li>
           <li className="nav-list__item nav-list__item--short">
             <a 
-              href="#"
+              href={`/index.html#home#${SORT_TYPES.MOST_USED}`} 
               className="link"
               data-nav={ SORT_TYPES.MOST_USED }
               onClick={((e) => sectionHandler(e))}
