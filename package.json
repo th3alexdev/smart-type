@@ -1,8 +1,17 @@
 {
   "name": "smart-type",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A browser extension that enables users to create custom commands for text expansion.",
+  "main": "main.jsx",
+  "author": "Alexander Pérez",
+  "license": "MIT",
   "type": "module",
+  "keywords": [
+    "browser",
+    "extension",
+    "text expansion",
+    "productivity"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
