@@ -12,7 +12,7 @@ function Header({ children, openNav, setOpenNav }) {
         <h1 className="brand">
           <a 
             target="_blank"
-            href="https://smart-type.netlify.app/"
+            href="https://smtype.netlify.app/"
             className="link"
             aria-label="SmartType - Visit homepage"
             >
