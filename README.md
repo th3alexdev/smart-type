@@ -57,7 +57,7 @@ In the future, the Weather App will include the following additions:
  - [ ] **Bug fixing:** Ongoing efforts will be made to identify and resolve any errors or issues encountered while using the extension, improving its overall stability and performance.
  - [ ] **Support for Firefox:** A version of SmartType will be developed to be compatible with the Firefox browser, expanding its accessibility to Firefox users.
 
-Installation 💻
+## Installation 💻
 
 To run this application locally, you'll need to have Node.js and npm installed on your machine. Once you've cloned this repository, navigate to the project directory and run the following commands:
 
