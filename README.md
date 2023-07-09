@@ -1,8 +1,19 @@
-# Smart Type ⚡ (in progress)
+# Smart Type ⚡
 SmartType is a powerful browser extension that allows users to create custom commands to automate repetitive typing tasks. With SmartType, you can save time and enhance your productivity by easily expanding predefined text snippets with just a few keystrokes.
 
 > [**View Landing Page**](https://smtype.netlify.app/)
-<img width="100%" src="https://cdn.discordapp.com/attachments/606233142021324816/1127383306770579506/demo.png">
+<img width="100%" src="https://cdn.discordapp.com/attachments/606233142021324816/1127391019399397506/smart-type.png">
+
+# Beta Status ⚠️
+SmartType is currently in beta, which means it is still under development and may contain bugs and limitations. I am committed to continuously improving the extension and providing a high-quality experience to the users. 
+
+I would like to mention that, due to financial constraints, I haven't been able to upload the extension to the Chrome Web Store yet. Therefore, the installation process requires loading the extension unpacked from the `dist folder`, as mentioned in the installation instructions. I truly appreciate your understanding regarding this matter.
+
+I value your feedback greatly, and I am actively listening to your suggestions and bug reports. Your input is vital in helping me identify and address any issues that arise.
+
+Please keep in mind that during this beta phase, you may need to reload the dashboard (by pressing F5) to ensure that changes are applied correctly.
+
+Thank you for your support and patience as I continue to work on improving SmartType.
 
 ## Features ✨
   1. Intuitive dashboard for managing commands and their expansions, making it easy for users to create, edit, and delete commands.
