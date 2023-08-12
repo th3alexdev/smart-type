@@ -2,7 +2,7 @@
 SmartType is a powerful browser extension that allows users to create custom commands to automate repetitive typing tasks. With SmartType, you can save time and enhance your productivity by easily expanding predefined text snippets with just a few keystrokes.
 
 > [**View Demo**](https://th3alexdev.github.io/weather-app/) <br>
-> [**View Landing Page**](https://smart-type.netlify.app/)
+> [**View Landing Page**](https://smtype.vercel.app/)
 <img width="100%" alt="">
 
 ## Features ✨
